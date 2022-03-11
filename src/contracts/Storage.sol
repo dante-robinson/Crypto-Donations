@@ -2,7 +2,6 @@
 pragma solidity ^0.8.12;
 
 contract Storage {
-
   // Create variables for total number of requests in each category
   uint256 medicalRequests;
   uint256 memorialRequests;
@@ -39,10 +38,11 @@ contract Storage {
     string contributorAddress;
   }
 
-  struct Organizer {
+  /* struct Organizer {
     string name;
     string role;
     // Addresses strings because solidity wont accept other blockchain addresses
+    // "CompilerError: Stack too deep, try removing local variables."
     string algoAddress;
     string avaxAddress;
     string bscAddress;
@@ -71,43 +71,50 @@ contract Storage {
     string trxAddress;
     string xrpAddress;
     string zecAddress;
-  }
+  } */
 
   // string = Category
-  mapping(string => mapping (uint256 => Request)) Requests;
+mapping (string => mapping (uint256 => Request)) Requests;
 
   // uint256 = Request ID
-  mapping(string => mapping(uint256 => Contributor) public Contributors;
-  mapping(string => mapping(uint256 => Organizer) public Organizers;
+  mapping(uint256 => Contributor) public Contributors;
+  /* mapping(string => mapping(uint256 => Organizer)) public Organizers; */
 
-  function returnCategory (string category) public returns (uint256 memory id) {
-    if (category == "medical"){
-      return medicalRequests.length();
+  /* function returnCategory(uint256 _category) public returns (uint256){
+    if (_category == 0) {
+      return categories[0];
     }
-  }
+  } */
 
   function createRequest (
-    string memory _title,
-    string memory _description,
+    string memory title,
+    string memory description,
     string memory category,
-    uint256 _amount
+    uint256 amount
   ) public {
-    uint256 id = returnCategory(category);
-    Requests[category][id] = Request(_title, _description, _amount);
+    if (keccak256(bytes(category)) == keccak256(bytes("medical"))) {
+      Requests[category][medicalRequests] = Request(title, description, amount, 0, 0);
+    }
   }
 
   function editRequest (
     string memory title,
-    string memory description
-  ) public {}
+    string memory description,
+    string memory category,
+    uint256 id
+  ) public {
 
-  function addAddressToRequest () public {}
+  }
 
-  function verifyAddress () public {}
+  /* function addAddressToOrganizer () public {
 
-  function upvote () public {}
+  }
 
-  function downvote () public {}
+  function verifyOrganizerAddress () public {}
 
-  function makeUpdatePost () public {}
+  function upvoteRequest () public {}
+
+  function downvoteRequest () public {}
+
+  function updatePost () public {} */
 }
