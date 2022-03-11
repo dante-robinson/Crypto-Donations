@@ -3,45 +3,6 @@ pragma solidity ^0.8.12;
 
 contract Storage {
 
-  struct Request {
-      string title;
-      string description;
-      // Amount Requested
-      uint256 amount;
-      uint256 totalContributors;
-      // uint256 = totalContributors
-      mapping (uint256 => Contributor) Contributors;
-      // Addresses
-      string algoAddress;
-      string avaxAddress;
-      string bscAddress;
-      string btcAddress;
-      string bchAddress;
-      string adaAddress;
-      string atomAddress;
-      string dashAddress;
-      string dcrAddress;
-      string dgbAddress;
-      string dogeAddress;
-      string egldAddress;
-      string ethAddress;
-      string etcAddress;
-      string ftmAddress;
-      string oneAddress;
-      string zenAddress;
-      string ltcAddress;
-      string xmrAddress;
-      string dotAddress;
-      string maticAddress;
-      string rskAddress;
-      string solAddress;
-      string xlmAddress;
-      string xtzAddress;
-      string trxAddress;
-      string xrpAddress;
-      string zecAddress;
-  }
-
   // Create variables for total number of requests in each category
   uint256 medicalRequests;
   uint256 memorialRequests;
@@ -63,22 +24,76 @@ contract Storage {
   uint256 wishRequests;
   uint256 individualRequests;
 
-  // uint256 = Request ID (String selected via UI)
-  mapping(string => mapping (uint256 => Request)) Requests;
+  struct Request {
+      string title;
+      string description;
+      // Amount Requested
+      uint256 amount;
+      uint256 totalOrganizers;
+      uint256 totalContributors;
+  }
 
   struct Contributor {
     uint256 amountDonated;
+    string name;
     string contributorAddress;
   }
 
-  mapping(uint256 => Contributor) public Contributors;
+  struct Organizer {
+    string name;
+    string role;
+    // Addresses strings because solidity wont accept other blockchain addresses
+    string algoAddress;
+    string avaxAddress;
+    string bscAddress;
+    string btcAddress;
+    string bchAddress;
+    string adaAddress;
+    string atomAddress;
+    string dashAddress;
+    string dcrAddress;
+    string dgbAddress;
+    string dogeAddress;
+    string egldAddress;
+    string ethAddress;
+    string etcAddress;
+    string ftmAddress;
+    string oneAddress;
+    string zenAddress;
+    string ltcAddress;
+    string xmrAddress;
+    string dotAddress;
+    string maticAddress;
+    string rskAddress;
+    string solAddress;
+    string xlmAddress;
+    string xtzAddress;
+    string trxAddress;
+    string xrpAddress;
+    string zecAddress;
+  }
+
+  // string = Category
+  mapping(string => mapping (uint256 => Request)) Requests;
+
+  // uint256 = Request ID
+  mapping(string => mapping(uint256 => Contributor) public Contributors;
+  mapping(string => mapping(uint256 => Organizer) public Organizers;
+
+  function returnCategory (string category) public returns (uint256 memory id) {
+    if (category == "medical"){
+      return medicalRequests.length();
+    }
+  }
 
   function createRequest (
-    string memory title,
-    string memory description
+    string memory _title,
+    string memory _description,
+    string memory category,
+    uint256 _amount
   ) public {
-
-
+    uint256 id = returnCategory(category);
+    Requests[category][id] = Request(_title, _description, _amount);
   }
 
   function editRequest (
