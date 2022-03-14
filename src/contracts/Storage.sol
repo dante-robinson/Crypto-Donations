@@ -4,6 +4,7 @@ pragma solidity ^0.8.12;
 contract Storage {
   /* Create variables for total number of requests in each category strings for
   each will be defined in the UI. */
+  // Check gas cost of individual variables vs array. Maybe cheaper but probably not
   uint256 medicalRequests;
   uint256 memorialRequests;
   uint256 emergencyRequests;
@@ -88,12 +89,6 @@ contract Storage {
   // category => id of request => id of organizer
   mapping(string => mapping(uint256 => mapping(uint256 => Organizer))) public Organizers;
 
-  /* function returnCategory(uint256 _category) public returns (uint256){
-    if (_category == 0) {
-      return categories[0];
-    }
-  } */
-
   function createRequest (
     string memory _title,
     string memory _description,
@@ -167,7 +162,32 @@ contract Storage {
     );
   }
 
-  /* function editOrganziers () {} */
+  // Name will be immutable and should be noted in UI to be right the first time
+  function editOrganzier (
+    string memory _name,
+    string memory _role,
+    string memory _category,
+    uint256 _requestId,
+    uint256 _organizerId,
+    string[24] memory _addresses
+  ) public {
+    require(keccak256(bytes(_name)) == keccak256(bytes(Organizers[_category][_requestId][_organizerId].name)));
+    /* This method will cost extra gas and can be improved upon. This can be
+    solved by either taking in less addresses or another way. In it's current
+    form it will call the current data from the blockchain and input it into the
+    UI and once resubmitted you will paying that extra gas to rewrite the same
+    address again for those unchanged. The goal would be to save that extra gas
+    cost so only the address added/changed is what's sent back. */
+    Organizers[_category][_requestId][_organizerId] = Organizer(
+      _name, _role, _organizerId, [_addresses[0], _addresses[1], _addresses[2],
+      _addresses[3], _addresses[4], _addresses[5], _addresses[6], _addresses[7],
+      _addresses[8], _addresses[9], _addresses[10], _addresses[11], _addresses[12],
+      _addresses[13], _addresses[14], _addresses[15], _addresses[16], _addresses[17],
+      _addresses[18], _addresses[19], _addresses[20], _addresses[21], _addresses[22],
+      _addresses[23]
+      ]
+    );
+  }
 
   /* function editRequest (
     string memory title,
