@@ -41,14 +41,8 @@ To keep things simple people who want to open a request will have to pay a gas f
   <a href="https://www.dash.org/">
     <img src="src/Images/Dash.png" width=64 />
   </a>
-  <a href="https://www.dash.org/">
-    <img src="src/Images/Dash.png" width=64 />
-  </a>
   <a href="https://dogecoin.com/">
     <img src="src/Images/Dogecoin.png" width=64 />
-  </a>
-  <a href="https://elrond.com/">
-    <img src="src/Images/Elrond.png" width=64 />
   </a>
   <a href="https://elrond.com/">
     <img src="src/Images/Elrond.png" width=64 />
