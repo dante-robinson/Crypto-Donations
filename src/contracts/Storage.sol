@@ -41,6 +41,7 @@ contract Storage {
     uint256 amountDonated;
     string name;
     string contributorAddress;
+    uint256 id;
   }
 
   struct Organizer {
@@ -83,9 +84,8 @@ contract Storage {
 
   // category => id of request
   mapping(string => mapping (uint256 => Request)) public Requests;
-
-  // category => Request ID
-  mapping(string => mapping(uint256 => Contributor)) public Contributors;
+  // category => id of request => id of contributor
+  mapping(string => mapping(uint256 => mapping(uint256 => Contributor))) public Contributors;
   // category => id of request => id of organizer
   mapping(string => mapping(uint256 => mapping(uint256 => Organizer))) public Organizers;
   // category => id of request => Polygon address of user
@@ -269,5 +269,18 @@ contract Storage {
     }
 
     Requests[_category][_requestId] = Request(_title, _description, _requestId, _amount, _totalOrganizers, _totalContributors, _score, _creator);
+  }
+
+  function addContributor(
+      string memory _category,
+      uint256 _requestId,
+      uint256 _totalContributors,
+      string memory _name,
+      uint256 _amountDonated,
+      string memory _contributorAddress
+  ) public {
+    // _name & _contributorAddress in UI should be allowed to be listed as anonymous
+    Contributors[_category][_requestId][_totalContributors] = Contributor(_amountDonated, _name, _contributorAddress, _totalContributors);
+    Requests[_category][_requestId].totalContributors++;
   }
 }
