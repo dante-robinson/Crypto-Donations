@@ -34,6 +34,7 @@ contract Storage {
       uint256 totalOrganizers;
       uint256 totalContributors;
       uint256 score;
+      address creator;
   }
 
   struct Contributor {
@@ -44,13 +45,12 @@ contract Storage {
 
   struct Organizer {
     string name;
-    // Will be defined in UI as selectable options similar to category
     string role;
     uint256 id;
     /* Coins are chosen based on being meant for medium of exchange with high
     transaction volume at the time. ADA and ETH are there aswell for smart
     contract support if people are interested in using that. */
-    string[24] addresses;
+    string[23] addresses;
     /* index 0 = btcAddress;
     index 1 = bchAddress;
     index 2 = adaAddress;
@@ -78,17 +78,19 @@ contract Storage {
     index 19 = maticAddress;
     index 20 = solAddress;
     index 21 = xlmAddress;
-    index 22 = trxAddress;
-    index 23 = xrpAddress; */
+    index 22 = xrpAddress; */
   }
 
-  // string = Category
-  mapping (string => mapping (uint256 => Request)) Requests;
+  // category => id of request
+  mapping(string => mapping (uint256 => Request)) public Requests;
 
-  // uint256 = Request ID
+  // category => Request ID
   mapping(string => mapping(uint256 => Contributor)) public Contributors;
   // category => id of request => id of organizer
   mapping(string => mapping(uint256 => mapping(uint256 => Organizer))) public Organizers;
+  // category => id of request => Polygon address of user
+  mapping(string => mapping(uint256 => mapping(address => bool))) public isVoted;
+
 
   function createRequest (
     string memory _title,
@@ -100,57 +102,77 @@ contract Storage {
     else statements however may be useful in the case of the frontend being
     shutdown and needing to be redeployed with all the data in the proper location */
     if (keccak256(bytes(_category)) == keccak256(bytes("medical"))) {
-        Requests[_category][medicalRequests] = Request(_title, _description, medicalRequests, _amount, 0, 0, 0);
+        Requests[_category][medicalRequests] = Request(_title, _description, medicalRequests, _amount, 0, 0, 0, msg.sender);
+        medicalRequests++;
     } else if (keccak256(bytes(_category)) == keccak256(bytes("memorial"))) {
-        Requests[_category][memorialRequests] = Request(_title, _description, memorialRequests, _amount, 0, 0, 0);
+        Requests[_category][memorialRequests] = Request(_title, _description, memorialRequests, _amount, 0, 0, 0, msg.sender);
+        memorialRequests++;
     } else if (keccak256(bytes(_category)) == keccak256(bytes("emergency"))) {
-        Requests[_category][emergencyRequests] = Request(_title, _description, emergencyRequests, _amount, 0, 0, 0);
+        Requests[_category][emergencyRequests] = Request(_title, _description, emergencyRequests, _amount, 0, 0, 0, msg.sender);
+        emergencyRequests++;
     } else if (keccak256(bytes(_category)) == keccak256(bytes("nonprofit"))) {
-        Requests[_category][nonprofitRequests] = Request(_title, _description, nonprofitRequests, _amount, 0, 0, 0);
+        Requests[_category][nonprofitRequests] = Request(_title, _description, nonprofitRequests, _amount, 0, 0, 0, msg.sender);
+        nonprofitRequests++;
     } else if (keccak256(bytes(_category)) == keccak256(bytes("education"))) {
-        Requests[_category][educationRequests] = Request(_title, _description, educationRequests, _amount, 0, 0, 0);
+        Requests[_category][educationRequests] = Request(_title, _description, educationRequests, _amount, 0, 0, 0, msg.sender);
+        educationRequests++;
     } else if (keccak256(bytes(_category)) == keccak256(bytes("animal"))) {
-        Requests[_category][animalRequests] = Request(_title, _description, animalRequests, _amount, 0, 0, 0);
+        Requests[_category][animalRequests] = Request(_title, _description, animalRequests, _amount, 0, 0, 0, msg.sender);
+        animalRequests++;
     } else if (keccak256(bytes(_category)) == keccak256(bytes("environment"))) {
-        Requests[_category][environmentRequests] = Request(_title, _description, environmentRequests, _amount, 0, 0, 0);
+        Requests[_category][environmentRequests] = Request(_title, _description, environmentRequests, _amount, 0, 0, 0, msg.sender);
+        environmentRequests++;
     } else if (keccak256(bytes(_category)) == keccak256(bytes("business"))) {
-        Requests[_category][businessRequests] = Request(_title, _description, businessRequests, _amount, 0, 0, 0);
+        Requests[_category][businessRequests] = Request(_title, _description, businessRequests, _amount, 0, 0, 0, msg.sender);
+        businessRequests++;
     } else if (keccak256(bytes(_category)) == keccak256(bytes("community"))) {
-        Requests[_category][communityRequests] = Request(_title, _description, communityRequests, _amount, 0, 0, 0);
+        Requests[_category][communityRequests] = Request(_title, _description, communityRequests, _amount, 0, 0, 0, msg.sender);
+        communityRequests++;
     } else if (keccak256(bytes(_category)) == keccak256(bytes("competition"))) {
-        Requests[_category][competitionRequests] = Request(_title, _description, competitionRequests, _amount, 0, 0, 0);
+        Requests[_category][competitionRequests] = Request(_title, _description, competitionRequests, _amount, 0, 0, 0, msg.sender);
+        competitionRequests++;
     } else if (keccak256(bytes(_category)) == keccak256(bytes("creative"))) {
-        Requests[_category][creativeRequests] = Request(_title, _description, creativeRequests, _amount, 0, 0, 0);
+        Requests[_category][creativeRequests] = Request(_title, _description, creativeRequests, _amount, 0, 0, 0, msg.sender);
+        creativeRequests++;
     } else if (keccak256(bytes(_category)) == keccak256(bytes("event"))) {
-        Requests[_category][eventRequests] = Request(_title, _description, eventRequests, _amount, 0, 0, 0);
+        Requests[_category][eventRequests] = Request(_title, _description, eventRequests, _amount, 0, 0, 0, msg.sender);
+        eventRequests++;
     } else if (keccak256(bytes(_category)) == keccak256(bytes("religious"))) {
-        Requests[_category][religiousRequests] = Request(_title, _description, religiousRequests, _amount, 0, 0, 0);
+        Requests[_category][religiousRequests] = Request(_title, _description, religiousRequests, _amount, 0, 0, 0, msg.sender);
+        religiousRequests++;
     } else if (keccak256(bytes(_category)) == keccak256(bytes("family"))) {
-        Requests[_category][familyRequests] = Request(_title, _description, familyRequests, _amount, 0, 0, 0);
+        Requests[_category][familyRequests] = Request(_title, _description, familyRequests, _amount, 0, 0, 0, msg.sender);
+        familyRequests++;
     } else if (keccak256(bytes(_category)) == keccak256(bytes("sport"))) {
-        Requests[_category][sportRequests] = Request(_title, _description, sportRequests, _amount, 0, 0, 0);
+        Requests[_category][sportRequests] = Request(_title, _description, sportRequests, _amount, 0, 0, 0, msg.sender);
+        sportRequests++;
     } else if (keccak256(bytes(_category)) == keccak256(bytes("travel"))) {
-        Requests[_category][travelRequests] = Request(_title, _description, travelRequests, _amount, 0, 0, 0);
+        Requests[_category][travelRequests] = Request(_title, _description, travelRequests, _amount, 0, 0, 0, msg.sender);
+        travelRequests++;
     } else if (keccak256(bytes(_category)) == keccak256(bytes("volunteer"))) {
-        Requests[_category][volunteerRequests] = Request(_title, _description, volunteerRequests, _amount, 0, 0, 0);
+        Requests[_category][volunteerRequests] = Request(_title, _description, volunteerRequests, _amount, 0, 0, 0, msg.sender);
+        volunteerRequests++;
     } else if (keccak256(bytes(_category)) == keccak256(bytes("wish"))) {
-        Requests[_category][wishRequests] = Request(_title, _description, wishRequests, _amount, 0, 0, 0);
+        Requests[_category][wishRequests] = Request(_title, _description, wishRequests, _amount, 0, 0, 0, msg.sender);
+        wishRequests++;
     } else if (keccak256(bytes(_category)) == keccak256(bytes("individual"))) {
-        Requests[_category][individualRequests] = Request(_title, _description, individualRequests, _amount, 0, 0, 0);
+        Requests[_category][individualRequests] = Request(_title, _description, individualRequests, _amount, 0, 0, 0, msg.sender);
+        individualRequests++;
     }
   }
 
   /* Name should also have a default value of Anonymous in the UI for those who
     don't feel safe connecting names to addresses.
   */
-  function initalOrganzier (
+  function addOrganzier (
     string memory _name,
     string memory _role,
     string memory _category,
     uint256 _requestId,
     uint256 _totalOrganizers,
-    string[24] memory _addresses
+    string[23] memory _addresses
   ) public {
+    require(msg.sender == Requests[_category][_requestId].creator);
     /* Not all addresses need to be assigned a value. In the UI any addresses not
     assigned by default should be set to "" which would mean an empty string.
     That will cause setting the mapping data to not fail. Role will also be set
@@ -160,10 +182,9 @@ contract Storage {
       _addresses[3], _addresses[4], _addresses[5], _addresses[6], _addresses[7],
       _addresses[8], _addresses[9], _addresses[10], _addresses[11], _addresses[12],
       _addresses[13], _addresses[14], _addresses[15], _addresses[16], _addresses[17],
-      _addresses[18], _addresses[19], _addresses[20], _addresses[21], _addresses[22],
-      _addresses[23]
-      ]
+      _addresses[18], _addresses[19], _addresses[20], _addresses[21], _addresses[22]      ]
     );
+    Requests[_category][_requestId].totalOrganizers++;
   }
 
   function editOrganzier (
@@ -171,8 +192,9 @@ contract Storage {
     string memory _category,
     uint256 _requestId,
     uint256 _organizerId,
-    string[24] memory _addresses
+    string[23] memory _addresses
   ) public {
+    require(msg.sender == Requests[_category][_requestId].creator);
     string memory _name = Organizers[_category][_requestId][_organizerId].name;
     /* This method will cost extra gas and can be improved upon. This can be
     solved by either taking in less addresses or another way. In it's current
@@ -185,8 +207,7 @@ contract Storage {
       _addresses[3], _addresses[4], _addresses[5], _addresses[6], _addresses[7],
       _addresses[8], _addresses[9], _addresses[10], _addresses[11], _addresses[12],
       _addresses[13], _addresses[14], _addresses[15], _addresses[16], _addresses[17],
-      _addresses[18], _addresses[19], _addresses[20], _addresses[21], _addresses[22],
-      _addresses[23]
+      _addresses[18], _addresses[19], _addresses[20], _addresses[21], _addresses[22]
       ]
     );
   }
@@ -201,13 +222,15 @@ contract Storage {
     uint256 _id,
     uint256 _amount
   ) public {
+    require(msg.sender == Requests[_category][_id].creator);
     string memory _title = Requests[_category][_id].title;
     uint256 _totalOrganizers = Requests[_category][_id].totalOrganizers;
     uint256 _totalContributors = Requests[_category][_id].totalContributors;
     uint256 _score = Requests[_category][_id].score;
+    address _creator = Requests[_category][_id].creator;
     /* Category doesn't need the string checked like createRequest because that
     was just to */
-    Requests[_category][_id] = Request(_title, _description, _id, _amount, _totalOrganizers, _totalContributors, _score);
+    Requests[_category][_id] = Request(_title, _description, _id, _amount, _totalOrganizers, _totalContributors, _score, _creator);
   }
 
   /* This feature may need to be disabled in UI in the future if it is used harmfully.
@@ -217,16 +240,17 @@ contract Storage {
   through requests and determine which is best to display first. */
   function voteRequest (
     string memory _category,
-    uint256 _id,
+    uint256 _requestId,
     uint256 _score,
     bool vote
   ) public {
-    string memory _title = Requests[_category][_id].title;
-    string memory _description = Requests[_category][_id].description;
-    uint256 _amount = Requests[_category][_id].amount;
-    uint256 _totalOrganizers = Requests[_category][_id].totalOrganizers;
-    uint256 _totalContributors = Requests[_category][_id].totalContributors;
-
+    require(isVoted[_category][_requestId][msg.sender] == false);
+    string memory _title = Requests[_category][_requestId].title;
+    string memory _description = Requests[_category][_requestId].description;
+    uint256 _amount = Requests[_category][_requestId].amount;
+    uint256 _totalOrganizers = Requests[_category][_requestId].totalOrganizers;
+    uint256 _totalContributors = Requests[_category][_requestId].totalContributors;
+    address _creator = Requests[_category][_requestId].creator;
     /* Downvoting can cause a large majority of people to downvote a real donation
     request just bekcause it offends them or doesn't align with their views. This
     should not be solely used as a way to sort requests in the UI for this reason,
@@ -244,6 +268,6 @@ contract Storage {
       _score--;
     }
 
-    Requests[_category][_id] = Request(_title, _description, _id, _amount, _totalOrganizers, _totalContributors, _score);
+    Requests[_category][_requestId] = Request(_title, _description, _requestId, _amount, _totalOrganizers, _totalContributors, _score, _creator);
   }
 }
