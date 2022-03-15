@@ -92,13 +92,13 @@ To keep things simple people who want to open a request will have to pay a gas f
 
 This project uses Polygon as the back-end you do not need to sign up for an account on a centralized server all that is needed is a Polygon account through a wallet.
 
-### What if Proof of Stake / Polygon fails
+### What if Proof of Stake / Polygon fails?
 
 If Proof of Stake/Polygon were to fail then we can assume the nodes for polygon would be taken off the network the data would then in this case be lost however the contract can then be redeployed to something like Ethereum Classic that uses a Proof of Work Model, however all the data would still need to be re-uploaded, which would require everyone to make new requests.
 
 ### Why is x/y coin not supported?
 
-Coins were selected based on high volume as well as being used for mainly medium of exchange or a smart contract platform. Not every coin in the word needs to be supported and just adds more unnecessary code to the codebase. The current selection is quite large and should fit 99% of people's needs.
+Coins were selected based on high volume as well as being used for mainly medium of exchange or a smart contract platform. Not every coin in the world needs to be supported and just adds more unnecessary code to the codebase. The current selection is quite large and should fit 99% of people's needs.
 
 ### How much percentage do you take?
 
@@ -107,6 +107,10 @@ Coins were selected based on high volume as well as being used for mainly medium
 ### What can I use this for?
 
 You can use this as an alternative to centralized application such as GoFundMe or setup an individual page to keep a list of your wallets for people who may be interested in donating to you. You can also join a community or make your own you can set these up where you need to approve those asking to join your community (eg. a FOSS company) or leave it open for anyone interested to be able to join (eg. a group of people who support FOSS).
+
+### What if front end gets taken down?
+
+Since everything is stored on nodes on the blockchain and not stored on a centralized server if the website was to get taken down the source code can be used to deploy the front end to a different domain name. Since the data is stored on the blockchain this project can even have multiple different front-end websites connecting to it and reading the data from the deployed address.
 
 ### How can I help the project?
 
@@ -126,4 +130,4 @@ This project is completely FOSS (Free Open Source Software) it is licensed under
 1. The user will make a Request and submit it to the network. This will cost a gas fee.
 2. After creating the request the user will then be asked to input data of who is to receive the funds (Organizer). This allows the user to not just list themselves but they can choose to list a friend or family member in need for a request as well with their wallet address. This will also cost a gas fee.
 
-That's it at this point the Data for the request and Organizer should be store in Polygon's ledger.
+That's it at this point the Data for the request and Organizer should be stored in Polygon's ledger. To send funds to someone you are not sending anything through Polygon, the front-end is meant to simply list out addresses for people to be able to use to send funds from their wallets.
