@@ -4,26 +4,25 @@ pragma solidity ^0.8.12;
 contract Storage {
   /* Create variables for total number of requests in each category strings for
   each will be defined in the UI. */
-  // Check gas cost of individual variables vs array. Maybe cheaper but probably not
-  uint256 medicalRequests;
-  uint256 memorialRequests;
-  uint256 emergencyRequests;
-  uint256 nonprofitRequests;
-  uint256 educationRequests;
-  uint256 animalRequests;
-  uint256 environmentRequests;
-  uint256 businessRequests;
-  uint256 communityRequests;
-  uint256 competitionRequests;
-  uint256 creativeRequests;
-  uint256 eventRequests;
-  uint256 religiousRequests;
-  uint256 familyRequests;
-  uint256 sportRequests;
-  uint256 travelRequests;
-  uint256 volunteerRequests;
-  uint256 wishRequests;
-  uint256 individualRequests;
+  uint256 public medicalRequests;
+  uint256 public memorialRequests;
+  uint256 public emergencyRequests;
+  uint256 public nonprofitRequests;
+  uint256 public educationRequests;
+  uint256 public animalRequests;
+  uint256 public environmentRequests;
+  uint256 public businessRequests;
+  uint256 public communityRequests;
+  uint256 public competitionRequests;
+  uint256 public creativeRequests;
+  uint256 public eventRequests;
+  uint256 public religiousRequests;
+  uint256 public familyRequests;
+  uint256 public sportRequests;
+  uint256 public travelRequests;
+  uint256 public volunteerRequests;
+  uint256 public wishRequests;
+  uint256 public individualRequests;
 
   struct Request {
       string title;

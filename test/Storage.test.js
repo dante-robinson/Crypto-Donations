@@ -12,4 +12,11 @@ contract("Donation", (accounts) => {
     // Check it equals an address instead of nothing
     assert.notEqual(creator, "0x0000000000000000000000000000000000000000");
   });
+  it("checks that categories grow in size", async () => {
+    // Check the medicalRequests category is equal to 1
+    assert.equal((await donation.medicalRequests()).words[0], 1);
+    await donation.createRequest("title", "description", "medical", 5);
+    // After adding a second request recheck that the category equals 2
+    assert.equal((await donation.medicalRequests()).words[0], 2);
+  });
 });
