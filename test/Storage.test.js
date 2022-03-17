@@ -1,4 +1,4 @@
-const assert = require("assert");
+require("chai").use(require("chai-as-promised")).should();
 const Donation = artifacts.require("./Storage.sol");
 
 contract("Donation", (accounts) => {
@@ -25,5 +25,20 @@ contract("Donation", (accounts) => {
     const amount = (await donation.Requests("medical", 0)).amount;
     assert.equal(description, "new description");
     assert.equal(amount.words[0], 50);
+  });
+  it("should only let the creator edit the request", async () => {
+    await donation
+      .editRequest("new description", "medical", 1, 50, {
+        from: accounts[1],
+      })
+      .should.be.rejectedWith(
+        "VM Exception while processing transaction: revert"
+      );
+    // chai.should
+    //   .equal(
+    //     ),
+    //     "Returned error: VM Exception while processing transaction: revert"
+    //   )
+    //   .to.throw();
   });
 });
