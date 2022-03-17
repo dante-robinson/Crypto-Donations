@@ -91,7 +91,7 @@ contract Storage {
   }
 
   // category => id of request
-  mapping(string => mapping (uint256 => Request)) public Requests;
+  mapping(string => mapping(uint256 => Request)) public Requests;
   // category => id of request => id of contributor
   mapping(string => mapping(uint256 => mapping(uint256 => Contributor))) public Contributors;
   // category => id of request => id of organizer
