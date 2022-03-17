@@ -19,4 +19,11 @@ contract("Donation", (accounts) => {
     // After adding a second request recheck that the category equals 2
     assert.equal((await donation.medicalRequests()).words[0], 2);
   });
+  it("should be able to edit the request", async () => {
+    await donation.editRequest("new description", "medical", 0, 50);
+    const description = (await donation.Requests("medical", 0)).description;
+    const amount = (await donation.Requests("medical", 0)).amount;
+    assert.equal(description, "new description");
+    assert.equal(amount.words[0], 50);
+  });
 });

@@ -237,8 +237,7 @@ contract Storage {
     uint256 _score = Requests[_category][_requestId].score;
     address _creator = Requests[_category][_requestId].creator;
     uint256 _totalPosts = Requests[_category][_requestId].totalPosts;
-    /* Category doesn't need the string checked like createRequest because that
-    was just to */
+    
     Requests[_category][_requestId] = Request(_title, _description, _requestId, _amount, _totalOrganizers, _totalContributors, _score, _creator, _totalPosts);
   }
 
