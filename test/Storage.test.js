@@ -54,4 +54,13 @@ contract("Donation", (accounts) => {
       "VM Exception while processing transaction: revert"
     );
   });
+  it("should be able to edit organizer", async () => {
+    // Checks first address is accounts[1]
+    assert.equal((await donation.getOrganizer("medical", 0, 0)).addresses[0], accounts[1]);
+    await donation.editOrganizer("member", "medical", 0, 0, [
+      "0x0","","","","","","","","","","","","","","","","","","","","","",""
+    ])
+    // This will check the first address changes to 0x0
+    assert.equal((await donation.getOrganizer("medical", 0, 0)).addresses[0], "0x0");
+  })
 });

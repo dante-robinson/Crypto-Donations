@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: LGPL-3.0-only
 pragma solidity ^0.8.12;
+pragma abicoder v2;
 
 contract Storage {
   /* Create variables for total number of requests in each category strings for
@@ -80,6 +81,11 @@ contract Storage {
     index 20 = solAddress;
     index 21 = xlmAddress;
     index 22 = xrpAddress; */
+  }
+
+  // Just to return Organizer addresses array in UI/tests
+  function getOrganizer (string memory _category, uint _requestId, uint _organizerId) public view returns (Organizer memory) {
+    return Organizers[_category][_requestId][_organizerId];
   }
 
   // Date can be passed in from UI as UTC Time
@@ -195,7 +201,7 @@ contract Storage {
     Requests[_category][_requestId].totalOrganizers++;
   }
 
-  function editOrganzier (
+  function editOrganizer (
     string memory _role,
     string memory _category,
     uint256 _requestId,
@@ -237,7 +243,7 @@ contract Storage {
     uint256 _score = Requests[_category][_requestId].score;
     address _creator = Requests[_category][_requestId].creator;
     uint256 _totalPosts = Requests[_category][_requestId].totalPosts;
-    
+
     Requests[_category][_requestId] = Request(_title, _description, _requestId, _amount, _totalOrganizers, _totalContributors, _score, _creator, _totalPosts);
   }
 
