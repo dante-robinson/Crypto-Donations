@@ -34,11 +34,24 @@ contract("Donation", (accounts) => {
       .should.be.rejectedWith(
         "VM Exception while processing transaction: revert"
       );
-    // chai.should
-    //   .equal(
-    //     ),
-    //     "Returned error: VM Exception while processing transaction: revert"
-    //   )
-    //   .to.throw();
+  });
+  it("should be able to add organizers", async () => {
+    const Organizers = (await donation.Requests("medical", 0)).totalOrganizers;
+    const account = accounts[1];
+    // The UI should auto submit any empty address input fields as empty string like so
+    await donation.addOrganzier("John", "member", "medical", 0, Organizers, [
+      account,"","","","","","","","","","","","","","","","","","","","","",""
+    ]);
+    assert.equal((await donation.Organizers("medical", 0, 0)).name, "John");
+  });
+  it("should only let the creator add organizers" , async () => {
+    const Organizers = (await donation.Requests("medical", 1)).totalOrganizers;
+    const account = accounts[1];
+
+    await donation.addOrganzier("John", "member", "medical", 1, Organizers, [
+      account,"","","","","","","","","","","","","","","","","","","","","",""
+    ], { from: account }).should.be.rejectedWith(
+      "VM Exception while processing transaction: revert"
+    );
   });
 });
