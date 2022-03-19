@@ -79,4 +79,8 @@ contract("Donation", (accounts) => {
       "VM Exception while processing transaction: revert"
     );
   });
+  it("allows a user to contribute to a request", async () => {
+    await donation.addContributor("medical", 0, "anonymous", 5, accounts[1]);
+    assert.equal((await donation.Contributors("medical", 0, 0)).contributorAddress, accounts[1]);
+  });
 });

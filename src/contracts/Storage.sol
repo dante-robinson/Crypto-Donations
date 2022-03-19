@@ -289,13 +289,13 @@ contract Storage {
   }
 
   function addContributor(
-      string memory _category,
-      uint256 _requestId,
-      uint256 _totalContributors,
-      string memory _name,
-      uint256 _amountDonated,
-      string memory _contributorAddress
+    string memory _category,
+    uint256 _requestId,
+    string memory _name,
+    uint256 _amountDonated,
+    string memory _contributorAddress
   ) public {
+    uint256 _totalContributors = Requests[_category][_requestId].totalContributors;
     // _name & _contributorAddress in UI should be allowed to be listed as anonymous
     Contributors[_category][_requestId][_totalContributors] = Contributor(_amountDonated, _name, _contributorAddress, _totalContributors);
     Requests[_category][_requestId].totalContributors++;
@@ -312,6 +312,5 @@ contract Storage {
     require(msg.sender == Requests[_category][_requestId].creator);
     Posts[_category][_requestId][_totalPosts] = Post(_title, _description, _date);
     Requests[_category][_requestId].totalPosts++;
-
   }
 }
