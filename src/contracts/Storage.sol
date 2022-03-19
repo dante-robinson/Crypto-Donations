@@ -304,12 +304,13 @@ contract Storage {
   function addPost (
     string memory _category,
     uint256 _requestId,
-    uint256 _totalPosts,
     string memory _title,
     string memory _description,
     string memory _date
   ) public {
     require(msg.sender == Requests[_category][_requestId].creator);
+    uint256 _totalPosts = Requests[_category][_requestId].totalPosts;
+
     Posts[_category][_requestId][_totalPosts] = Post(_title, _description, _date);
     Requests[_category][_requestId].totalPosts++;
   }

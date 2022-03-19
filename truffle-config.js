@@ -25,7 +25,7 @@ module.exports = {
     solc: {
       version: "^0.8.12",
       enabled: true,
-      // runs: 200000,
+      runs: 200000,
     },
   },
 };
