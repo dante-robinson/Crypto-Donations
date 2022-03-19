@@ -62,5 +62,12 @@ contract("Donation", (accounts) => {
     ])
     // This will check the first address changes to 0x0
     assert.equal((await donation.getOrganizer("medical", 0, 0)).addresses[0], "0x0");
-  })
+  });
+  it("should only let the creator edit organizers", async () => {
+    await donation.editOrganizer("member", "medical", 0, 0, [
+      "0x1","","","","","","","","","","","","","","","","","","","","","",""
+    ], { from: accounts[1] }).should.be.rejectedWith(
+      "VM Exception while processing transaction: revert"
+    );
+  });
 });
