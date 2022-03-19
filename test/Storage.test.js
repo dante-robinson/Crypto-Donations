@@ -70,4 +70,13 @@ contract("Donation", (accounts) => {
       "VM Exception while processing transaction: revert"
     );
   });
+  it("allows a user to vote on a request", async () => {
+    await donation.voteRequest("medical", 0, true);
+    assert.equal((await donation.Requests("medical", 0)).score.words[0], 1);
+  });
+  it("shouln't allow the user to vote twice on the request", async () => {
+    await donation.voteRequest("medical", 0, true).should.be.rejectedWith(
+      "VM Exception while processing transaction: revert"
+    );
+  });
 });

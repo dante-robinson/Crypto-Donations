@@ -255,8 +255,7 @@ contract Storage {
   function voteRequest (
     string memory _category,
     uint256 _requestId,
-    uint256 _score,
-    bool vote
+    bool _vote
   ) public {
     require(isVoted[_category][_requestId][msg.sender] == false);
     string memory _title = Requests[_category][_requestId].title;
@@ -266,6 +265,8 @@ contract Storage {
     uint256 _totalContributors = Requests[_category][_requestId].totalContributors;
     address _creator = Requests[_category][_requestId].creator;
     uint256 _totalPosts = Requests[_category][_requestId].totalPosts;
+    uint256 _score = Requests[_category][_requestId].score;
+
     /* Downvoting can cause a large majority of people to downvote a real donation
     request just bekcause it offends them or doesn't align with their views. This
     should not be solely used as a way to sort requests in the UI for this reason,
@@ -277,12 +278,13 @@ contract Storage {
     the case. */
 
     // bool = true then upvote else downvote
-    if (vote) {
+    if (_vote) {
       _score++;
     } else {
       _score--;
     }
 
+    isVoted[_category][_requestId][msg.sender] = true;
     Requests[_category][_requestId] = Request(_title, _description, _requestId, _amount, _totalOrganizers, _totalContributors, _score, _creator, _totalPosts);
   }
 
