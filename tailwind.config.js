@@ -7,7 +7,8 @@ module.exports = {
       },
       gridTemplateRows: {
         nav: "7vh",
-        tips: "1fr 0.15fr 0.75fr 1fr",
+        howitworks: "5vh 25vh",
+        tips: "5vh 20vh",
       },
       colors: {
         "crayola-blue": "#1d81fa",

@@ -1,0 +1,31 @@
+import React from "react";
+
+const HowItWorks = () => {
+  return (
+    <div className="grid grid-rows-howitworks">
+      <h1 className="text-4xl text-center">How It Works</h1>
+      <ul className="space-y-2 text-center">
+        <li>
+          <h3 className="text-xl font-bold">Option A</h3>
+        </li>
+        <li>Create a Request (gas fee)</li>
+        <li>Add an Organizer to recieve funds to (gas fee)</li>
+        <li>
+          Someone can then contribute to the request by using the provided
+          address to make a manual transaction or contribute through the UI
+          using the connected wallet
+        </li>
+        <li>
+          <h3 className="text-xl font-bold">Option B</h3>
+        </li>
+        <li>Add a username to your connected Polygon address</li>
+        <li>
+          Add your other crypto addresses to your profile and share the profile
+          link
+        </li>
+      </ul>
+    </div>
+  );
+};
+
+export default HowItWorks;
