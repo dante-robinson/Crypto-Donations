@@ -1,11 +1,10 @@
 import React from "react";
+import Tips from "./Home/Tips";
 
 const Home = () => {
   return (
-    <div className="flex bg:greyish-white">
-      <ul>
-        <li>Home</li>
-      </ul>
+    <div>
+      <Tips />
     </div>
   );
 };
