@@ -18,73 +18,73 @@ To keep things simple people who want to open a request will have to pay a gas f
 
 <p>
   <a href="https://www.algorand.com/">
-    <img src="src/Images/Algorand.png" width=64 />
+    <img src="public/Algorand.png" width=64 />
   </a>
   <a href="https://www.avax.network/">
-    <img src="src/Images/Avalanche.png" width=64 />
+    <img src="public/Avalanche.png" width=64 />
   </a>
   <a href="https://www.bnbchain.world/">
-    <img src="src/Images/BSC.png" width=64 />
+    <img src="public/BSC.png" width=64 />
   </a>
   <a href="https://bitcoin.org/">
-    <img src="src/Images/Bitcoin.png" width=64 />
+    <img src="public/Bitcoin.png" width=64 />
   </a>
   <a href="https://bch.info/">
-    <img src="src/Images/BitcoinCash.png" width=64 />
+    <img src="public/BitcoinCash.png" width=64 />
   </a>
   <a href="https://cardano.org/">
-    <img src="src/Images/Cardano.png" width=64 />
+    <img src="public/Cardano.png" width=64 />
   </a>
   <a href="https://cosmos.network/">
-    <img src="src/Images/Cosmos.png" width=64 />
+    <img src="public/Cosmos.png" width=64 />
   </a>
   <a href="https://www.dash.org/">
-    <img src="src/Images/Dash.png" width=64 />
+    <img src="public/Dash.png" width=64 />
   </a>
   <a href="https://dogecoin.com/">
-    <img src="src/Images/Dogecoin.png" width=64 />
+    <img src="public/Dogecoin.png" width=64 />
   </a>
   <a href="https://elrond.com/">
-    <img src="src/Images/Elrond.png" width=64 />
+    <img src="public/Elrond.png" width=64 />
   </a>
   <a href="https://ethereum.org/">
-    <img src="src/Images/Ethereum.png" width=64 />
+    <img src="public/Ethereum.png" width=64 />
   </a>
   <a href="https://ethereumclassic.org/">
-    <img src="src/Images/EthereumClassic.png" width=64 />
+    <img src="public/EthereumClassic.png" width=64 />
   </a>
   <a href="https://fantom.foundation/">
-    <img src="src/Images/Fantom.png" width=64 />
+    <img src="public/Fantom.png" width=64 />
   </a>
   <a href="https://www.harmony.one/">
-    <img src="src/Images/Harmony.png" width=64 />
+    <img src="public/Harmony.png" width=64 />
   </a>
   <a href="https://litecoin.org/">
-    <img src="src/Images/Litecoin.png" width=64 />
+    <img src="public/Litecoin.png" width=64 />
   </a>
   <a href="https://www.getmonero.org/">
-    <img src="src/Images/Monero.png" width=64 />
+    <img src="public/Monero.png" width=64 />
   </a>
   <a href="https://polkadot.network/">
-    <img src="src/Images/Polkadot.png" width=64 />
+    <img src="public/Polkadot.png" width=64 />
   </a>
   <a href="https://polygon.technology/">
-    <img src="src/Images/Polygon.png" width=64 />
+    <img src="public/Polygon.png" width=64 />
   </a>
   <a href="https://xrpl.org/">
-    <img src="src/Images/Ripple.png" width=64 />
+    <img src="public/Ripple.png" width=64 />
   </a>
   <a href="https://www.stellar.org/">
-    <img src="src/Images/Stellar.png" width=64 />
+    <img src="public/Stellar.png" width=64 />
   </a>
   <a href="https://solana.com/">
-    <img src="src/Images/Solana.png" width=64 />
+    <img src="public/Solana.png" width=64 />
   </a>
   <a href="https://www.terra.money/">
-    <img src="src/Images/Terra.png" width=64 />
+    <img src="public/Terra.png" width=64 />
   </a>
   <a href="https://z.cash/">
-    <img src="src/Images/ZCash.png" width=64 />
+    <img src="public/ZCash.png" width=64 />
   </a>
 </p>
 

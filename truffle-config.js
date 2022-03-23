@@ -1,5 +1,5 @@
 require("dotenv").config();
-const HDWalletProvider = require("truffle-hdwallet-provider-privkey");
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 const privateKey = [process.env.DEPLOYER_KEY];
 
 module.exports = {
