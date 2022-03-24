@@ -13,7 +13,8 @@ module.exports = {
       colors: {
         "crayola-blue": "#1d81fa",
         "darker-blue": "#145aaf",
-        "greyish-white": "#f2f2f2",
+        "greyish-white": "#e7e7e7",
+        "anti-flash-white": "#f2f2f2",
         "maya-blue": "#5bc9f9",
       },
     },

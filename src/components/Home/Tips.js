@@ -2,7 +2,7 @@ import React from "react";
 
 const Tips = () => {
   return (
-    <div className="grid grid-rows-tips bg:greyish-white">
+    <div className="grid grid-rows-tips anti-flash-white">
       <h1 className="row-start-1 text-4xl justify-self-center">Tips</h1>
       <ul className="p-4 row-start-2 space-y-2 list-none text-center justify-self-center">
         <li>
