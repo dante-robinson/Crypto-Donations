@@ -10,6 +10,13 @@ import {
 const NavigationBar = (props) => {
   const [ChooseWalletOpen, setChooseWalletOpen] = useState(false);
   const [CategoriesOpen, setCategoriesOpen] = useState(false);
+  const [SearchInput, setSearchInput] = useState("");
+
+  const handleSubmit = (e) => {
+    console.log(e);
+    e.preventDefault();
+    alert("you have searched for - " + SearchInput);
+  };
 
   return (
     <nav className="flex h-[7vh] bg-crayola-blue">
@@ -18,9 +25,22 @@ const NavigationBar = (props) => {
           className="text-greyish-white ml-6"
           icon={faMagnifyingGlass}
         />
+        <div className="flex w-64 h-8 ml-2 bg-greyish-white rounded-2xl">
+          <input
+            type="search"
+            placeholder="Search"
+            onChange={(event) => setSearchInput(event.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                handleSubmit(e);
+              }
+            }}
+            className="flex ml-2 self-center bg-greyish-white border-none outline-none w-64 h-8 rounded-2xl"
+          />
+        </div>
       </div>
       <div className="flex w-screen justify-between items-center">
-        <div className="flex ml-4 ">
+        <div className="flex ml-2">
           <button
             onClick={() => setCategoriesOpen(true)}
             className="text-greyish-white w-28 h-10 rounded-md"

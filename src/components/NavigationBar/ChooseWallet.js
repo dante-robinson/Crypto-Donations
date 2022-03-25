@@ -29,7 +29,7 @@ const ChooseWallet = ({ setChooseWalletOpen }) => {
           </button>
         </div>
         <div className="flex flex-col mb-2 items-center space-y-4">
-          <button className="flex justify-between items-center bg-greyish-white border-[1px] border-gray-400 w-96 h-16 rounded-lg">
+          <button className="flex justify-between items-center bg-greyish-white border border-gray-400 w-96 h-16 rounded-lg">
             <div className="ml-4">
               <p>Metamask</p>
             </div>
@@ -37,7 +37,7 @@ const ChooseWallet = ({ setChooseWalletOpen }) => {
               <Image src={Metamask} alt="Icon" width="45px" height="45px" />
             </div>
           </button>
-          <button className="flex justify-between bg-greyish-white border-[1px] border-gray-400 w-96 h-16 items-center rounded-lg">
+          <button className="flex justify-between bg-greyish-white border border-gray-400 w-96 h-16 items-center rounded-lg">
             <div className="ml-4">
               <p>WalletConnect</p>
             </div>
@@ -51,7 +51,7 @@ const ChooseWallet = ({ setChooseWalletOpen }) => {
             </div>
           </button>
 
-          <button className="flex justify-between bg-greyish-white border-[1px] border-gray-400 w-96 h-16 items-center rounded-lg">
+          <button className="flex justify-between bg-greyish-white border border-gray-400 w-96 h-16 items-center rounded-lg">
             <div className="ml-4">
               <p>Fortmatic</p>
             </div>
@@ -60,7 +60,7 @@ const ChooseWallet = ({ setChooseWalletOpen }) => {
             </div>
           </button>
 
-          <button className="flex justify-between bg-greyish-white border-[1px] border-gray-400 w-96 h-16 items-center rounded-lg">
+          <button className="flex justify-between bg-greyish-white border border-gray-400 w-96 h-16 items-center rounded-lg">
             <div className="ml-4">
               <p>Portis</p>
             </div>
@@ -68,7 +68,7 @@ const ChooseWallet = ({ setChooseWalletOpen }) => {
               <Image src={Portis} alt="Icon" width="35px" height="35px" />
             </div>
           </button>
-          <button className="flex justify-between bg-greyish-white border-[1px] border-gray-400 w-96 h-16 items-center rounded-lg">
+          <button className="flex justify-between bg-greyish-white border border-gray-400 w-96 h-16 items-center rounded-lg">
             <div className="ml-4">
               <p>Coinbase Wallet</p>
             </div>
