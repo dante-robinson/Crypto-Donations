@@ -5,25 +5,25 @@ pragma abicoder v2;
 contract Storage {
   /* Create variables for total number of requests in each category strings for
   each will be defined in the UI. */
-  uint256 public medicalRequests;
-  uint256 public memorialRequests;
-  uint256 public emergencyRequests;
-  uint256 public nonprofitRequests;
-  uint256 public educationRequests;
   uint256 public animalRequests;
-  uint256 public environmentRequests;
   uint256 public businessRequests;
   uint256 public communityRequests;
   uint256 public competitionRequests;
   uint256 public creativeRequests;
+  uint256 public educationRequests;
+  uint256 public emergencyRequests;
+  uint256 public environmentRequests;
   uint256 public eventRequests;
-  uint256 public religiousRequests;
   uint256 public familyRequests;
+  uint256 public individualRequests;
+  uint256 public medicalRequests;
+  uint256 public memorialRequests;
+  uint256 public nonprofitRequests;
+  uint256 public religiousRequests;
   uint256 public sportRequests;
   uint256 public travelRequests;
   uint256 public volunteerRequests;
   uint256 public wishRequests;
-  uint256 public individualRequests;
 
   struct Request {
       string title;

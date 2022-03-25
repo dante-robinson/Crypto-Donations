@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
+import OnClickOutside from "../OnClickOutside";
 import Metamask from "../../../public/Metamask.png";
 import WalletConnect from "../../../public/WalletConnect.png";
 import Fortmatic from "../../../public/Fortmatic.png";
@@ -8,13 +9,22 @@ import CoinbaseWallet from "../../../public/CoinbaseWallet.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-const ChooseWallet = ({ setIsOpen }) => {
+const ChooseWallet = ({ setChooseWalletOpen }) => {
+  const ref = useRef();
+  OnClickOutside(ref, () => setChooseWalletOpen(false));
+
   return (
     <div className="bg-black bg-opacity-50 absolute inset-0 flex justify-center items-center">
-      <div className="bg-anti-flash-white w-[26rem] h-[32rem] rounded-lg">
+      <div
+        ref={ref}
+        className="bg-anti-flash-white w-[26rem] h-[32rem] rounded-lg"
+      >
         <h3 className="text-xl text-center mt-8">Connect a wallet</h3>
         <div className="flex justify-end mr-4 relative bottom-12 text-2xl">
-          <button className="text-2xl" onClick={() => setIsOpen(false)}>
+          <button
+            className="text-2xl"
+            onClick={() => setChooseWalletOpen(false)}
+          >
             <FontAwesomeIcon icon={faXmark} />
           </button>
         </div>
