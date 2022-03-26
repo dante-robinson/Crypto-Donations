@@ -6,16 +6,16 @@ import Donation from "../src/artifacts/Storage.json";
 import { Web3ReactProvider } from "@web3-react/core";
 import React, { useEffect } from "react";
 
-function MyApp() {
-  useEffect(() => {
-    function getLibrary(provider, connector) {
-      return new Web3(provider);
-    }
+const MyApp = () => {
+  function getLibrary(provider, connector) {
+    return new Web3(provider);
+  }
 
+  useEffect(() => {
     const web3 = new Web3(
       window.ethereum
         ? window.ethereum
-        : "https://polygon-mumbai.g.alchemy.com/v2/" + env.ALCHEMY_API
+        : "https://polygon-mumbai.g.alchemy.com/v2/" + process.env.ALCHEMY_API
     );
 
     const DonationAddress = "0x50BdA764B2671af022aFDb3CA61C197902B9226d";
@@ -26,10 +26,12 @@ function MyApp() {
 
   return (
     <div>
-      <NavigationBar />
-      <Home />
+      <Web3ReactProvider getLibrary={getLibrary}>
+        <NavigationBar />
+        <Home />
+      </Web3ReactProvider>
     </div>
   );
-}
+};
 
 export default MyApp;
