@@ -16,6 +16,7 @@ module.exports = {
         "darker-white": "#dbdbdb",
         "greyish-white": "#e7e7e7",
         "anti-flash-white": "#f2f2f2",
+        "light-anti-flash-white": "#f6f6f6",
         "maya-blue": "#5bc9f9",
       },
     },
