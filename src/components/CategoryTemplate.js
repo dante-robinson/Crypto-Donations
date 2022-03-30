@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import NavigationBar from "./NavigationBar";
+import GridItems from "./CategoryTemplate/GridItems";
 
 const CategoryTemplate = ({ category, donation }) => {
   const [TotalRequests, setTotalRequests] = useState(null);
@@ -74,19 +75,19 @@ const CategoryTemplate = ({ category, donation }) => {
   };
 
   const isLastPage = () => {
-    if (Pages == currentPage) {
+    if (Pages === currentPage) {
       setPageRequests(TotalRequests % 15);
       setLastPage(true);
     }
   };
 
   const getPageRequests = () => {
-    if (setLastPage(false)) {
+    if (LastPage == false) {
       setPageRequests(15);
     }
   };
 
-  const createGrid = (PageRequests, Pages) => {
+  const createGrid = (PageRequests) => {
     if (PageRequests === 3 || PageRequests < 3) {
       return (
         <div className="grid grid-rows-1 grid-cols-5 w-screen grid-col-3 gap-6">
@@ -95,35 +96,37 @@ const CategoryTemplate = ({ category, donation }) => {
       );
     } else if (PageRequests === 6 || (PageRequests < 6 && PageRequests > 3)) {
       return (
-        <div className="grid grid-rows-2 grid-cols-5 w-screen grid-col-3 gap-6"></div>
+        <div className="grid grid-rows-2 grid-cols-5 w-screen grid-col-3 gap-6">
+          {createBoxes(PageRequests)}
+        </div>
       );
     } else if (PageRequests === 9 || (PageRequests < 9 && PageRequests > 6)) {
       return (
-        <div className="grid grid-rows-3 grid-cols-5 w-screen grid-col-3 gap-6"></div>
+        <div className="grid grid-rows-3 grid-cols-5 w-screen grid-col-3 gap-6">
+          {createBoxes(PageRequests)}
+        </div>
       );
     } else if (PageRequests === 12 || (PageRequests < 12 && PageRequests > 9)) {
       return (
-        <div className="grid grid-rows-4 grid-cols-5 w-screen grid-col-3 gap-6"></div>
+        <div className="grid grid-rows-4 grid-cols-5 w-screen grid-col-3 gap-6">
+          {createBoxes(PageRequests)}
+        </div>
       );
     } else if (PageRequests > 12) {
       return (
-        <div className="grid grid-rows-5 grid-cols-5 w-screen grid-col-3 gap-6"></div>
+        <div className="grid grid-rows-5 grid-cols-5 h-content w-screen grid-col-3 gap-6">
+          {createBoxes(PageRequests)}
+        </div>
       );
     }
   };
 
   const createBoxes = (pageRequests) => {
+    let output = [];
     for (let box = 0; box < pageRequests; box++) {
-      if (box === 0 || box === 3 || box === 6 || box === 10 || box === 13) {
-        return (
-          <button className="col-start-2 border-4 border-bg-darker-white bg-light-anti-flash-white w-84 h-96 rounded-md"></button>
-        );
-      } else {
-        return (
-          <div className="border-4 border-bg-darker-white bg-light-anti-flash-white w-84 h-96 rounded-md"></div>
-        );
-      }
+      output.push(<GridItems key={box} box={box} />);
     }
+    return output;
   };
 
   return (
