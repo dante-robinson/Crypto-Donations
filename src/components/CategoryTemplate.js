@@ -7,7 +7,7 @@ const CategoryTemplate = ({ category, donation }) => {
   const [TotalRequests, setTotalRequests] = useState(null);
   const [Pages, setPages] = useState(null);
   const [PageRequests, setPageRequests] = useState(null);
-  const [LastPage, setLastPage] = useState(false);
+  const [LastPage, setLastPage] = useState(null);
 
   const router = useRouter();
   const currentPage = router.query.pid;
@@ -16,10 +16,12 @@ const CategoryTemplate = ({ category, donation }) => {
     if (TotalRequests == null) return;
     getPages();
     isLastPage();
-    getPageRequests();
-    /* currentPage takes the longest to load so refreshing on that alone prevents
-    multiple refreshes of the useEffect functions */
   }, [TotalRequests]);
+
+  useEffect(() => {
+    if (LastPage == null) return;
+    getPageRequests();
+  }, [LastPage]);
 
   useEffect(() => {
     if (!donation) return;
@@ -28,7 +30,7 @@ const CategoryTemplate = ({ category, donation }) => {
 
   const getTotalRequests = async () => {
     let result;
-    if (category === "Animal") {
+    if (category === "animal") {
       result = await donation.methods.animalRequests().call();
     } else if (category === "Business") {
       result = await donation.methods.businessRequests().call();
@@ -75,9 +77,11 @@ const CategoryTemplate = ({ category, donation }) => {
   };
 
   const isLastPage = () => {
-    if (Pages === currentPage) {
+    if (Pages == currentPage) {
       setPageRequests(TotalRequests % 15);
       setLastPage(true);
+    } else {
+      setLastPage(false);
     }
   };
 
@@ -123,11 +127,28 @@ const CategoryTemplate = ({ category, donation }) => {
 
   const createBoxes = (pageRequests) => {
     let output = [];
+
+    let currentRequest = 0;
+    if (currentPage != 1) {
+      currentRequest = (currentPage - 1) * 15;
+    }
+
     for (let box = 0; box < pageRequests; box++) {
-      output.push(<GridItems key={box} box={box} />);
+      currentRequest += 1;
+      output.push(
+        <GridItems
+          key={box}
+          box={box}
+          donation={donation}
+          currentRequest={currentRequest}
+          category={category}
+        />
+      );
     }
     return output;
   };
+
+  const output = () => {};
 
   return (
     <div>
@@ -136,12 +157,16 @@ const CategoryTemplate = ({ category, donation }) => {
         <div className="flex w-screen justify-center">
           <h1 className="flex text-3xl font-bold p-4">{category} Requests</h1>
         </div>
-        {TotalRequests == 0 ? (
+        {TotalRequests != 0 && currentPage != null ? (
+          <div className="flex">{createGrid(PageRequests)}</div>
+        ) : TotalRequests == 0 && currentPage != null ? (
           <p className="flex text-2xl w-screen h-[80vh] items-center justify-center">
             There are no {category} Requests yet!
           </p>
         ) : (
-          <div className="flex">{createGrid(PageRequests)}</div>
+          <p className="flex text-2xl w-screen h-[80vh] items-center justify-center">
+            Loading...
+          </p>
         )}
       </div>
     </div>
