@@ -19,7 +19,7 @@ const CategoryTemplate = ({ category, donation }) => {
   }, [TotalRequests]);
 
   useEffect(() => {
-    if (LastPage == null) return;
+    if (LastPage == null && currentPage == null) return;
     getPageRequests();
   }, [LastPage]);
 
@@ -78,6 +78,7 @@ const CategoryTemplate = ({ category, donation }) => {
 
   const isLastPage = () => {
     if (Pages == currentPage) {
+      console.log(currentPage);
       setPageRequests(TotalRequests % 15);
       setLastPage(true);
     } else {

@@ -33,7 +33,7 @@ contract Storage {
       uint256 amount;
       uint256 totalOrganizers;
       uint256 totalContributors;
-      uint256 score;
+      int256 score;
       address creator;
       uint256 totalPosts;
   }
