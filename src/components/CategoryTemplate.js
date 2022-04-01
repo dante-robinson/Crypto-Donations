@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import NavigationBar from "./NavigationBar";
+import Footer from "./Footer";
 import GridItems from "./CategoryTemplate/GridItems";
 
 const CategoryTemplate = ({ category, donation }) => {
@@ -170,6 +171,7 @@ const CategoryTemplate = ({ category, donation }) => {
           </p>
         )}
       </div>
+      <Footer />
     </div>
   );
 };
