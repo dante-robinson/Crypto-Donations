@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import OnClickOutside from "../OnClickOutside";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faDog,
@@ -23,15 +22,9 @@ import {
   faStarHalfStroke,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Categories = ({ setCategoriesOpen }) => {
-  const ref = useRef();
-  OnClickOutside(ref, () => setCategoriesOpen(false));
-
+const Categories = () => {
   return (
-    <div
-      ref={ref}
-      className="flex absolute ml-24 mt-16 items-center bg-anti-flash-white w-[40rem] h-48 border-greyish-white border-2 rounded-md"
-    >
+    <div className="flex absolute ml-24 mt-16 items-center bg-anti-flash-white w-[40rem] h-48 border-greyish-white border-2 rounded-md">
       <ul className="flex flex-col p-6 space-y-2">
         <li>
           <a className="hover:underline underline-offset-2" href="#">
