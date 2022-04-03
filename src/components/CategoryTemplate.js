@@ -1,14 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import NavigationBar from "./NavigationBar";
+import OnClickOutside from "./OnClickOutside";
 import Footer from "./Footer";
 import GridItems from "./CategoryTemplate/GridItems";
+import CurrencyFilter from "./CategoryTemplate/CurrencyFilter";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 const CategoryTemplate = ({ category, donation }) => {
   const [TotalRequests, setTotalRequests] = useState(null);
   const [Pages, setPages] = useState(null);
   const [PageRequests, setPageRequests] = useState(null);
   const [LastPage, setLastPage] = useState(null);
+  const [CurrencyModal, setCurrencyModal] = useState(false);
+  const [Currency, setCurrency] = useState("BTC");
+
+  const CurrencyRef = useRef();
+  OnClickOutside(CurrencyRef, () => setCurrencyModal(false));
 
   const router = useRouter();
   const currentPage = router.query.pid;
@@ -16,8 +25,12 @@ const CategoryTemplate = ({ category, donation }) => {
   useEffect(() => {
     if (TotalRequests == null) return;
     getPages();
-    isLastPage();
   }, [TotalRequests]);
+
+  useEffect(() => {
+    if (Pages == null) return;
+    isLastPage();
+  }, [Pages]);
 
   useEffect(() => {
     if (LastPage == null && currentPage == null) return;
@@ -150,14 +163,37 @@ const CategoryTemplate = ({ category, donation }) => {
     return output;
   };
 
-  const output = () => {};
+  const Modal = () => {};
 
   return (
     <div>
       <NavigationBar />
+
       <div className="flex h-content w-screen flex-wrap">
-        <div className="flex w-screen justify-center">
-          <h1 className="flex text-3xl font-bold p-4">{category} Requests</h1>
+        <div className="w-screen text-center">
+          <h1 className="text-3xl font-bold p-4">{category} Requests</h1>
+        </div>
+        <div className="grid grid-rows-1 grid-cols-5 w-screen h-12 gap-6">
+          <div className="col-start-2">
+            <button
+              onClick={
+                CurrencyModal === false
+                  ? () => setCurrencyModal(true)
+                  : () => setCurrencyModal(false)
+              }
+              className="w-28 h-8 rounded-md border-2 bg-anti-flash-white"
+            >
+              <FontAwesomeIcon className="mr-2" icon={faAngleDown} />
+              Currency
+            </button>
+            {CurrencyModal && (
+              <CurrencyFilter
+                ref={CurrencyRef}
+                setCurrency={setCurrency}
+                setCurrencyModal={setCurrencyModal}
+              />
+            )}
+          </div>
         </div>
         {TotalRequests != 0 && currentPage != null ? (
           <div className="flex">{createGrid(PageRequests)}</div>

@@ -8,12 +8,17 @@ import {
   faSquareCaretDown as Downvote,
   faSquareCaretUp as Upvote,
 } from "@fortawesome/free-regular-svg-icons";
+import axios from "axios";
 
 const GridItems = (props) => {
   const [Title, setTitle] = useState(null);
   const [Description, setDescription] = useState(null);
   const [Amount, setAmount] = useState(null);
   const [Score, setScore] = useState(null);
+
+  useEffect(() => {
+    getRequestData();
+  }, []);
 
   const getRequestData = async () => {
     let response = await props.donation.methods
@@ -26,9 +31,15 @@ const GridItems = (props) => {
     setScore(response.score);
   };
 
-  useEffect(() => {
-    getRequestData();
-  }, []);
+  const changeCurrency = (convertTo) => {
+    let requestURL;
+    if (convertTo === "eth") {
+      requestURL = `https://api.exchangerate.host/convert?from=busd&to=eth&places=18&source=crypto`;
+    } else if (convertTo === "btc") {
+    }
+    axios.get(requestURL);
+    let test = 0.000024;
+  };
 
   if (
     props.box === 0 ||
