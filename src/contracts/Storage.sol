@@ -115,63 +115,63 @@ contract Storage {
     /* Sorting into category variables makes the code more complex with large if
     else statements however may be useful in the case of the frontend being
     shutdown and needing to be redeployed with all the data in the proper location */
-    if (keccak256(bytes(_category)) == keccak256(bytes("medical"))) {
-        Requests[_category][medicalRequests] = Request(_title, _description, medicalRequests, _amount, 0, 0, 0, msg.sender, 0);
-        medicalRequests++;
-    } else if (keccak256(bytes(_category)) == keccak256(bytes("memorial"))) {
-        Requests[_category][memorialRequests] = Request(_title, _description, memorialRequests, _amount, 0, 0, 0, msg.sender, 0);
-        memorialRequests++;
-    } else if (keccak256(bytes(_category)) == keccak256(bytes("emergency"))) {
-        Requests[_category][emergencyRequests] = Request(_title, _description, emergencyRequests, _amount, 0, 0, 0, msg.sender, 0);
-        emergencyRequests++;
-    } else if (keccak256(bytes(_category)) == keccak256(bytes("nonprofit"))) {
-        Requests[_category][nonprofitRequests] = Request(_title, _description, nonprofitRequests, _amount, 0, 0, 0, msg.sender, 0);
-        nonprofitRequests++;
-    } else if (keccak256(bytes(_category)) == keccak256(bytes("education"))) {
-        Requests[_category][educationRequests] = Request(_title, _description, educationRequests, _amount, 0, 0, 0, msg.sender, 0);
-        educationRequests++;
-    } else if (keccak256(bytes(_category)) == keccak256(bytes("animal"))) {
+     if (keccak256(bytes(_category)) == keccak256(bytes("Animal"))) {
         Requests[_category][animalRequests] = Request(_title, _description, animalRequests, _amount, 0, 0, 0, msg.sender, 0);
         animalRequests++;
-    } else if (keccak256(bytes(_category)) == keccak256(bytes("environment"))) {
-        Requests[_category][environmentRequests] = Request(_title, _description, environmentRequests, _amount, 0, 0, 0, msg.sender, 0);
-        environmentRequests++;
-    } else if (keccak256(bytes(_category)) == keccak256(bytes("business"))) {
+    } else if (keccak256(bytes(_category)) == keccak256(bytes("Business"))) {
         Requests[_category][businessRequests] = Request(_title, _description, businessRequests, _amount, 0, 0, 0, msg.sender, 0);
         businessRequests++;
-    } else if (keccak256(bytes(_category)) == keccak256(bytes("community"))) {
+    } else if (keccak256(bytes(_category)) == keccak256(bytes("Community"))) {
         Requests[_category][communityRequests] = Request(_title, _description, communityRequests, _amount, 0, 0, 0, msg.sender, 0);
         communityRequests++;
-    } else if (keccak256(bytes(_category)) == keccak256(bytes("competition"))) {
+    } else if (keccak256(bytes(_category)) == keccak256(bytes("Competition"))) {
         Requests[_category][competitionRequests] = Request(_title, _description, competitionRequests, _amount, 0, 0, 0, msg.sender, 0);
         competitionRequests++;
-    } else if (keccak256(bytes(_category)) == keccak256(bytes("creative"))) {
+    } else if (keccak256(bytes(_category)) == keccak256(bytes("Creative"))) {
         Requests[_category][creativeRequests] = Request(_title, _description, creativeRequests, _amount, 0, 0, 0, msg.sender, 0);
         creativeRequests++;
-    } else if (keccak256(bytes(_category)) == keccak256(bytes("event"))) {
+    } else if (keccak256(bytes(_category)) == keccak256(bytes("Education"))) {
+        Requests[_category][educationRequests] = Request(_title, _description, educationRequests, _amount, 0, 0, 0, msg.sender, 0);
+        educationRequests++;
+    } else if (keccak256(bytes(_category)) == keccak256(bytes("Emergency"))) {
+        Requests[_category][emergencyRequests] = Request(_title, _description, emergencyRequests, _amount, 0, 0, 0, msg.sender, 0);
+        emergencyRequests++;
+    } else if (keccak256(bytes(_category)) == keccak256(bytes("Environment"))) {
+        Requests[_category][environmentRequests] = Request(_title, _description, environmentRequests, _amount, 0, 0, 0, msg.sender, 0);
+        environmentRequests++;
+    } else if (keccak256(bytes(_category)) == keccak256(bytes("Event"))) {
         Requests[_category][eventRequests] = Request(_title, _description, eventRequests, _amount, 0, 0, 0, msg.sender, 0);
         eventRequests++;
-    } else if (keccak256(bytes(_category)) == keccak256(bytes("religious"))) {
-        Requests[_category][religiousRequests] = Request(_title, _description, religiousRequests, _amount, 0, 0, 0, msg.sender, 0);
-        religiousRequests++;
-    } else if (keccak256(bytes(_category)) == keccak256(bytes("family"))) {
+    } else if (keccak256(bytes(_category)) == keccak256(bytes("Family"))) {
         Requests[_category][familyRequests] = Request(_title, _description, familyRequests, _amount, 0, 0, 0, msg.sender, 0);
         familyRequests++;
-    } else if (keccak256(bytes(_category)) == keccak256(bytes("sport"))) {
-        Requests[_category][sportRequests] = Request(_title, _description, sportRequests, _amount, 0, 0, 0, msg.sender, 0);
-        sportRequests++;
-    } else if (keccak256(bytes(_category)) == keccak256(bytes("travel"))) {
-        Requests[_category][travelRequests] = Request(_title, _description, travelRequests, _amount, 0, 0, 0, msg.sender, 0);
-        travelRequests++;
-    } else if (keccak256(bytes(_category)) == keccak256(bytes("volunteer"))) {
-        Requests[_category][volunteerRequests] = Request(_title, _description, volunteerRequests, _amount, 0, 0, 0, msg.sender, 0);
-        volunteerRequests++;
-    } else if (keccak256(bytes(_category)) == keccak256(bytes("wish"))) {
-        Requests[_category][wishRequests] = Request(_title, _description, wishRequests, _amount, 0, 0, 0, msg.sender, 0);
-        wishRequests++;
-    } else if (keccak256(bytes(_category)) == keccak256(bytes("individual"))) {
+    } else if (keccak256(bytes(_category)) == keccak256(bytes("Individual"))) {
         Requests[_category][individualRequests] = Request(_title, _description, individualRequests, _amount, 0, 0, 0, msg.sender, 0);
         individualRequests++;
+    } else if (keccak256(bytes(_category)) == keccak256(bytes("Medical"))) {
+        Requests[_category][medicalRequests] = Request(_title, _description, medicalRequests, _amount, 0, 0, 0, msg.sender, 0);
+        medicalRequests++;
+    } else if (keccak256(bytes(_category)) == keccak256(bytes("Memorial"))) {
+        Requests[_category][memorialRequests] = Request(_title, _description, memorialRequests, _amount, 0, 0, 0, msg.sender, 0);
+        memorialRequests++;
+    } else if (keccak256(bytes(_category)) == keccak256(bytes("NonProfit"))) {
+        Requests[_category][nonprofitRequests] = Request(_title, _description, nonprofitRequests, _amount, 0, 0, 0, msg.sender, 0);
+        nonprofitRequests++;
+    } else if (keccak256(bytes(_category)) == keccak256(bytes("Religious"))) {
+        Requests[_category][religiousRequests] = Request(_title, _description, religiousRequests, _amount, 0, 0, 0, msg.sender, 0);
+        religiousRequests++;
+    } else if (keccak256(bytes(_category)) == keccak256(bytes("Sports"))) {
+        Requests[_category][sportRequests] = Request(_title, _description, sportRequests, _amount, 0, 0, 0, msg.sender, 0);
+        sportRequests++;
+    } else if (keccak256(bytes(_category)) == keccak256(bytes("Travel"))) {
+        Requests[_category][travelRequests] = Request(_title, _description, travelRequests, _amount, 0, 0, 0, msg.sender, 0);
+        travelRequests++;
+    } else if (keccak256(bytes(_category)) == keccak256(bytes("Volunteer"))) {
+        Requests[_category][volunteerRequests] = Request(_title, _description, volunteerRequests, _amount, 0, 0, 0, msg.sender, 0);
+        volunteerRequests++;
+    } else if (keccak256(bytes(_category)) == keccak256(bytes("Wish"))) {
+        Requests[_category][wishRequests] = Request(_title, _description, wishRequests, _amount, 0, 0, 0, msg.sender, 0);
+        wishRequests++;
     }
   }
 
@@ -240,7 +240,7 @@ contract Storage {
     string memory _title = Requests[_category][_requestId].title;
     uint256 _totalOrganizers = Requests[_category][_requestId].totalOrganizers;
     uint256 _totalContributors = Requests[_category][_requestId].totalContributors;
-    uint256 _score = Requests[_category][_requestId].score;
+    int256 _score = Requests[_category][_requestId].score;
     address _creator = Requests[_category][_requestId].creator;
     uint256 _totalPosts = Requests[_category][_requestId].totalPosts;
 
@@ -265,7 +265,7 @@ contract Storage {
     uint256 _totalContributors = Requests[_category][_requestId].totalContributors;
     address _creator = Requests[_category][_requestId].creator;
     uint256 _totalPosts = Requests[_category][_requestId].totalPosts;
-    uint256 _score = Requests[_category][_requestId].score;
+    int256 _score = Requests[_category][_requestId].score;
 
     /* Downvoting can cause a large majority of people to downvote a real donation
     request just bekcause it offends them or doesn't align with their views. This
