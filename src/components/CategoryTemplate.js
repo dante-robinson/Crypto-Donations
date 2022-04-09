@@ -1,23 +1,23 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import NavigationBar from "./NavigationBar";
-import OnClickOutside from "./OnClickOutside";
 import Footer from "./Footer";
 import GridItems from "./CategoryTemplate/GridItems";
 import CurrencyFilter from "./CategoryTemplate/CurrencyFilter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import getConfig from "next/config";
 
-const CategoryTemplate = ({ category, donation }) => {
+const CategoryTemplate = (props) => {
   const [TotalRequests, setTotalRequests] = useState(null);
   const [Pages, setPages] = useState(null);
   const [PageRequests, setPageRequests] = useState(null);
   const [LastPage, setLastPage] = useState(null);
   const [CurrencyModal, setCurrencyModal] = useState(false);
   const [Currency, setCurrency] = useState("BTC");
-
-  const CurrencyRef = useRef();
-  OnClickOutside(CurrencyRef, () => setCurrencyModal(false));
+  // Default 1 : 1 ratio for BTC
+  const [ConversionRate, setConversionRate] = useState(1);
 
   const router = useRouter();
   const currentPage = router.query.pid;
@@ -38,50 +38,54 @@ const CategoryTemplate = ({ category, donation }) => {
   }, [LastPage]);
 
   useEffect(() => {
-    if (!donation) return;
+    if (!props.donation) return;
     getTotalRequests();
-  }, [donation]);
+  }, [props.donation]);
+
+  useEffect(() => {
+    changeCurrency(Currency);
+  }, [Currency]);
 
   const getTotalRequests = async () => {
     let result;
-    if (category === "animal") {
-      result = await donation.methods.animalRequests().call();
-    } else if (category === "Business") {
-      result = await donation.methods.businessRequests().call();
-    } else if (category === "Community") {
-      result = await donation.methods.communityRequests().call();
-    } else if (category === "Competition") {
-      result = await donation.methods.competitionRequests().call();
-    } else if (category === "Creative") {
-      result = await donation.methods.creativeRequests().call();
-    } else if (category === "Education") {
-      result = await donation.methods.educationRequests().call();
-    } else if (category === "Emergency") {
-      result = await donation.methods.emergencyRequests().call();
-    } else if (category === "Environment") {
-      result = await donation.methods.environmentRequests().call();
-    } else if (category === "Event") {
-      result = await donation.methods.eventRequests().call();
-    } else if (category === "Family") {
-      result = await donation.methods.familyRequests().call();
-    } else if (category === "Individual") {
-      result = await donation.methods.individualRequests().call();
-    } else if (category === "Medical") {
-      result = await donation.methods.medicalRequests().call();
-    } else if (category === "Memorial") {
-      result = await donation.methods.memorialRequests().call();
-    } else if (category === "Nonprofit") {
-      result = await donation.methods.nonprofitRequests().call();
-    } else if (category === "Religious") {
-      result = await donation.methods.religiousRequests().call();
-    } else if (category === "Sport") {
-      result = await donation.methods.sportRequests().call();
-    } else if (category === "Travel") {
-      result = await donation.methods.travelRequests().call();
-    } else if (category === "Volunteer") {
-      result = await donation.methods.volunteerRequests().call();
-    } else if (category === "Wish") {
-      result = await donation.methods.wishRequests().call();
+    if (props.category === "animal") {
+      result = await props.donation.methods.animalRequests().call();
+    } else if (props.category === "Business") {
+      result = await props.donation.methods.businessRequests().call();
+    } else if (props.category === "Community") {
+      result = await props.donation.methods.communityRequests().call();
+    } else if (props.category === "Competition") {
+      result = await props.donation.methods.competitionRequests().call();
+    } else if (props.category === "Creative") {
+      result = await props.donation.methods.creativeRequests().call();
+    } else if (props.category === "Education") {
+      result = await props.donation.methods.educationRequests().call();
+    } else if (props.category === "Emergency") {
+      result = await props.donation.methods.emergencyRequests().call();
+    } else if (props.category === "Environment") {
+      result = await props.donation.methods.environmentRequests().call();
+    } else if (props.category === "Event") {
+      result = await props.donation.methods.eventRequests().call();
+    } else if (props.category === "Family") {
+      result = await props.donation.methods.familyRequests().call();
+    } else if (props.category === "Individual") {
+      result = await props.donation.methods.individualRequests().call();
+    } else if (props.category === "Medical") {
+      result = await props.donation.methods.medicalRequests().call();
+    } else if (props.category === "Memorial") {
+      result = await props.donation.methods.memorialRequests().call();
+    } else if (props.category === "Nonprofit") {
+      result = await props.donation.methods.nonprofitRequests().call();
+    } else if (props.category === "Religious") {
+      result = await props.donation.methods.religiousRequests().call();
+    } else if (props.category === "Sport") {
+      result = await props.donation.methods.sportRequests().call();
+    } else if (props.category === "Travel") {
+      result = await props.donation.methods.travelRequests().call();
+    } else if (props.category === "Volunteer") {
+      result = await props.donation.methods.volunteerRequests().call();
+    } else if (props.category === "Wish") {
+      result = await props.donation.methods.wishRequests().call();
     }
     setTotalRequests(result);
   };
@@ -154,16 +158,56 @@ const CategoryTemplate = ({ category, donation }) => {
         <GridItems
           key={box}
           box={box}
-          donation={donation}
+          conversionRate={ConversionRate}
+          _currency={Currency}
+          donation={props.donation}
           currentRequest={currentRequest}
-          category={category}
+          category={props.category}
+          Algorand={props.Algorand}
+          Avalanche={props.Avalanche}
+          Bitcoin={props.Bitcoin}
+          BitcoinCash={props.BitcoinCash}
+          BSC={props.BSC}
+          Cardano={props.Cardano}
+          Cosmos={props.Cosmos}
+          Dash={props.Dash}
+          Dogecoin={props.Dogecoin}
+          Elrond={props.Elrond}
+          Ethereum={props.Ethereum}
+          EthereumClassic={props.EthereumClassic}
+          Fantom={props.Fantom}
+          Harmony={props.Harmony}
+          Litecoin={props.Litecoin}
+          Monero={props.Monero}
+          Polkadot={props.Polkadot}
+          Polygon={props.Polygon}
+          Ripple={props.Ripple}
+          Solana={props.Solana}
+          Stellar={props.Stellar}
+          Terra={props.Terra}
+          ZCash={props.ZCash}
         />
       );
     }
     return output;
   };
 
-  const Modal = () => {};
+  const { serverRuntimeConfig } = getConfig();
+
+  const changeCurrency = async (currency) => {
+    if (currency !== "BTC") {
+      axios
+        .get(`/api/nomics?currency=${currency}`, {
+          headers: {
+            Accept: "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        })
+        .then((response) => setConversionRate(response.data.price));
+    } else {
+      setConversionRate(1);
+    }
+  };
 
   return (
     <div>
@@ -171,7 +215,7 @@ const CategoryTemplate = ({ category, donation }) => {
 
       <div className="flex h-content w-screen flex-wrap">
         <div className="w-screen text-center">
-          <h1 className="text-3xl font-bold p-4">{category} Requests</h1>
+          <h1 className="text-3xl font-bold p-4">{props.category} Requests</h1>
         </div>
         <div className="grid grid-rows-1 grid-cols-5 w-screen h-12 gap-6">
           <div className="col-start-2">
@@ -184,13 +228,35 @@ const CategoryTemplate = ({ category, donation }) => {
               className="w-28 h-8 rounded-md border-2 bg-anti-flash-white"
             >
               <FontAwesomeIcon className="mr-2" icon={faAngleDown} />
-              Currency
+              {Currency}
             </button>
             {CurrencyModal && (
               <CurrencyFilter
-                ref={CurrencyRef}
                 setCurrency={setCurrency}
                 setCurrencyModal={setCurrencyModal}
+                Algorand={props.Algorand}
+                Avalanche={props.Avalanche}
+                Bitcoin={props.Bitcoin}
+                BitcoinCash={props.BitcoinCash}
+                BSC={props.BSC}
+                Cardano={props.Cardano}
+                Cosmos={props.Cosmos}
+                Dash={props.Dash}
+                Dogecoin={props.Dogecoin}
+                Elrond={props.Elrond}
+                Ethereum={props.Ethereum}
+                EthereumClassic={props.EthereumClassic}
+                Fantom={props.Fantom}
+                Harmony={props.Harmony}
+                Litecoin={props.Litecoin}
+                Monero={props.Monero}
+                Polkadot={props.Polkadot}
+                Polygon={props.Polygon}
+                Ripple={props.Ripple}
+                Solana={props.Solana}
+                Stellar={props.Stellar}
+                Terra={props.Terra}
+                ZCash={props.ZCash}
               />
             )}
           </div>
@@ -199,7 +265,7 @@ const CategoryTemplate = ({ category, donation }) => {
           <div className="flex">{createGrid(PageRequests)}</div>
         ) : TotalRequests == 0 && currentPage != null ? (
           <p className="flex text-2xl w-screen h-[80vh] items-center justify-center">
-            There are no {category} Requests yet!
+            There are no {props.category} Requests yet!
           </p>
         ) : (
           <p className="flex text-2xl w-screen h-[80vh] items-center justify-center">

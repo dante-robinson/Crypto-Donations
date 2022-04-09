@@ -1,29 +1,6 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import OnClickOutside from "../OnClickOutside";
-import Algorand from "../../../public/Algorand.png";
-import Avalanche from "../../../public/Avalanche.png";
-import Bitcoin from "../../../public/Bitcoin.png";
-import BitcoinCash from "../../../public/BitcoinCash.png";
-import BSC from "../../../public/BSC.png";
-import Cardano from "../../../public/Cardano.png";
-import Cosmos from "../../../public/Cosmos.png";
-import Dash from "../../../public/Dash.png";
-import Dogecoin from "../../../public/Dogecoin.png";
-import Elrond from "../../../public/Elrond.png";
-import Ethereum from "../../../public/Ethereum.png";
-import EthereumClassic from "../../../public/EthereumClassic.png";
-import Fantom from "../../../public/Fantom.png";
-import Harmony from "../../../public/Harmony.png";
-import Litecoin from "../../../public/Litecoin.png";
-import Monero from "../../../public/Monero.png";
-import Polkadot from "../../../public/Polkadot.png";
-import Polygon from "../../../public/Polygon.png";
-import Ripple from "../../../public/Ripple.png";
-import Solana from "../../../public/Solana.png";
-import Stellar from "../../../public/Stellar.png";
-import Terra from "../../../public/Terra.png";
-import ZCash from "../../../public/ZCash.png";
 
 const CurrencyFilter = (props) => {
   const CurrencyRef = useRef();
@@ -46,7 +23,12 @@ const CurrencyFilter = (props) => {
             onClick={() => selectCurrency("ADA")}
           >
             <div className="mr-1">
-              <Image src={Cardano} alt="Cardano Logo" width="16" height="16" />
+              <Image
+                src={props.Cardano}
+                alt="Cardano Logo"
+                width="16"
+                height="16"
+              />
             </div>
             ADA
           </button>
@@ -58,7 +40,7 @@ const CurrencyFilter = (props) => {
           >
             <div className="mr-1">
               <Image
-                src={Algorand}
+                src={props.Algorand}
                 alt="Algorand Logo"
                 width="16"
                 height="16"
@@ -73,7 +55,12 @@ const CurrencyFilter = (props) => {
             onClick={() => selectCurrency("ATOM")}
           >
             <div className="mr-1">
-              <Image src={Cosmos} alt="Cosmos Logo" width="16" height="16" />
+              <Image
+                src={props.Cosmos}
+                alt="Cosmos Logo"
+                width="16"
+                height="16"
+              />
             </div>
             ATOM
           </button>
@@ -85,7 +72,7 @@ const CurrencyFilter = (props) => {
           >
             <div className="mr-1">
               <Image
-                src={Avalanche}
+                src={props.Avalanche}
                 alt="Avalanche Logo"
                 width="16"
                 height="16"
@@ -100,7 +87,12 @@ const CurrencyFilter = (props) => {
             onClick={() => selectCurrency("BNB")}
           >
             <div className="mr-1">
-              <Image src={BSC} alt="Binance Logo" width="16" height="16" />
+              <Image
+                src={props.BSC}
+                alt="Binance Logo"
+                width="16"
+                height="16"
+              />
             </div>
             BNB
           </button>
@@ -111,7 +103,12 @@ const CurrencyFilter = (props) => {
             onClick={() => selectCurrency("BTC")}
           >
             <div className="mr-1">
-              <Image src={Bitcoin} alt="Bitcoin Logo" width="16" height="16" />
+              <Image
+                src={props.Bitcoin}
+                alt="Bitcoin Logo"
+                width="16"
+                height="16"
+              />
             </div>
             BTC
           </button>
@@ -123,7 +120,7 @@ const CurrencyFilter = (props) => {
           >
             <div className="mr-1">
               <Image
-                src={BitcoinCash}
+                src={props.BitcoinCash}
                 alt="Bitcoin Cash Logo"
                 width="16"
                 height="16"
@@ -138,7 +135,7 @@ const CurrencyFilter = (props) => {
             onClick={() => selectCurrency("DASH")}
           >
             <div className="mr-1">
-              <Image src={Dash} alt="Dash Logo" width="16" height="16" />
+              <Image src={props.Dash} alt="Dash Logo" width="16" height="16" />
             </div>
             DASH
           </button>
@@ -150,7 +147,7 @@ const CurrencyFilter = (props) => {
           >
             <div className="mr-1">
               <Image
-                src={Dogecoin}
+                src={props.Dogecoin}
                 alt="Dogecoin Logo"
                 width="16"
                 height="16"
@@ -166,7 +163,7 @@ const CurrencyFilter = (props) => {
           >
             <div className="mr-1">
               <Image
-                src={Polkadot}
+                src={props.Polkadot}
                 alt="Polkadot Logo"
                 width="16"
                 height="16"
@@ -181,7 +178,12 @@ const CurrencyFilter = (props) => {
             onClick={() => selectCurrency("EGLD")}
           >
             <div className="mr-1">
-              <Image src={Elrond} alt="Elrond Logo" width="16" height="16" />
+              <Image
+                src={props.Elrond}
+                alt="Elrond Logo"
+                width="16"
+                height="16"
+              />
             </div>
             EGLD
           </button>
@@ -193,7 +195,7 @@ const CurrencyFilter = (props) => {
           >
             <div className="mr-1">
               <Image
-                src={EthereumClassic}
+                src={props.EthereumClassic}
                 alt="Ethereum Classic Logo"
                 width="16"
                 height="16"
@@ -209,7 +211,7 @@ const CurrencyFilter = (props) => {
           >
             <div className="mr-1">
               <Image
-                src={Ethereum}
+                src={props.Ethereum}
                 alt="Ethereum Logo"
                 width="16"
                 height="16"
@@ -224,7 +226,12 @@ const CurrencyFilter = (props) => {
             onClick={() => selectCurrency("FTM")}
           >
             <div className="mr-1">
-              <Image src={Fantom} alt="Fantom Logo" width="16" height="16" />
+              <Image
+                src={props.Fantom}
+                alt="Fantom Logo"
+                width="16"
+                height="16"
+              />
             </div>
             FTM
           </button>
@@ -236,7 +243,7 @@ const CurrencyFilter = (props) => {
           >
             <div className="mr-1">
               <Image
-                src={Litecoin}
+                src={props.Litecoin}
                 alt="Litecoin Logo"
                 width="16"
                 height="16"
@@ -251,7 +258,12 @@ const CurrencyFilter = (props) => {
             onClick={() => selectCurrency("LUNA")}
           >
             <div className="mr-1">
-              <Image src={Terra} alt="Terra Logo" width="16" height="16" />
+              <Image
+                src={props.Terra}
+                alt="Terra Logo"
+                width="16"
+                height="16"
+              />
             </div>
             LUNA
           </button>
@@ -262,7 +274,12 @@ const CurrencyFilter = (props) => {
             onClick={() => selectCurrency("MATIC")}
           >
             <div className="mr-1">
-              <Image src={Polygon} alt="Polygon Logo" width="16" height="16" />
+              <Image
+                src={props.Polygon}
+                alt="Polygon Logo"
+                width="16"
+                height="16"
+              />
             </div>
             MATIC
           </button>
@@ -273,7 +290,12 @@ const CurrencyFilter = (props) => {
             onClick={() => selectCurrency("ONE")}
           >
             <div className="mr-1">
-              <Image src={Harmony} alt="Harmony Logo" width="16" height="16" />
+              <Image
+                src={props.Harmony}
+                alt="Harmony Logo"
+                width="16"
+                height="16"
+              />
             </div>
             ONE
           </button>
@@ -284,7 +306,12 @@ const CurrencyFilter = (props) => {
             onClick={() => selectCurrency("SOL")}
           >
             <div className="mr-1">
-              <Image src={Solana} alt="Solana Logo" width="16" height="16" />
+              <Image
+                src={props.Solana}
+                alt="Solana Logo"
+                width="16"
+                height="16"
+              />
             </div>
             SOL
           </button>
@@ -295,7 +322,12 @@ const CurrencyFilter = (props) => {
             onClick={() => selectCurrency("XLM")}
           >
             <div className="mr-1">
-              <Image src={Stellar} alt="Stellar Logo" width="16" height="16" />
+              <Image
+                src={props.Stellar}
+                alt="Stellar Logo"
+                width="16"
+                height="16"
+              />
             </div>
             XLM
           </button>
@@ -306,7 +338,12 @@ const CurrencyFilter = (props) => {
             onClick={() => selectCurrency("XMR")}
           >
             <div className="mr-1">
-              <Image src={Monero} alt="Monero Logo" width="16" height="16" />
+              <Image
+                src={props.Monero}
+                alt="Monero Logo"
+                width="16"
+                height="16"
+              />
             </div>
             XMR
           </button>
@@ -317,7 +354,12 @@ const CurrencyFilter = (props) => {
             onClick={() => selectCurrency("XRP")}
           >
             <div className="mr-1">
-              <Image src={Ripple} alt="Ripple Logo" width="16" height="16" />
+              <Image
+                src={props.Ripple}
+                alt="Ripple Logo"
+                width="16"
+                height="16"
+              />
             </div>
             XRP
           </button>
@@ -325,12 +367,17 @@ const CurrencyFilter = (props) => {
         <li>
           <button
             className="flex hover:underline underline-offset-2"
-            onClick={() => selectCurrency("ZCASH")}
+            onClick={() => selectCurrency("ZEC")}
           >
             <div className="mr-1">
-              <Image src={ZCash} alt="ZCash Logo" width="16" height="16" />
+              <Image
+                src={props.ZCash}
+                alt="ZCash Logo"
+                width="16"
+                height="16"
+              />
             </div>
-            ZCASH
+            ZEC
           </button>
         </li>
       </ul>
