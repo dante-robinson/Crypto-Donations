@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import NavigationBar from "./NavigationBar";
 import Footer from "./Footer";
@@ -6,6 +6,7 @@ import GridItems from "./CategoryTemplate/GridItems";
 import CurrencyFilter from "./CategoryTemplate/CurrencyFilter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import OnClickOutsideTwoRef from "./OnClickOutsideTwoRef";
 import axios from "axios";
 import getConfig from "next/config";
 
@@ -21,6 +22,12 @@ const CategoryTemplate = (props) => {
 
   const router = useRouter();
   const currentPage = router.query.pid;
+
+  const CurrencyRef = useRef();
+  const CurrencyButtonRef = useRef();
+  OnClickOutsideTwoRef(CurrencyRef, CurrencyButtonRef, () =>
+    setCurrencyModal(false)
+  );
 
   useEffect(() => {
     if (TotalRequests == null) return;
@@ -96,7 +103,6 @@ const CategoryTemplate = (props) => {
 
   const isLastPage = () => {
     if (Pages == currentPage) {
-      console.log(currentPage);
       setPageRequests(TotalRequests % 15);
       setLastPage(true);
     } else {
@@ -220,6 +226,7 @@ const CategoryTemplate = (props) => {
         <div className="grid grid-rows-1 grid-cols-5 w-screen h-12 gap-6">
           <div className="col-start-2">
             <button
+              ref={CurrencyButtonRef}
               onClick={
                 CurrencyModal === false
                   ? () => setCurrencyModal(true)
@@ -232,6 +239,7 @@ const CategoryTemplate = (props) => {
             </button>
             {CurrencyModal && (
               <CurrencyFilter
+                CurrencyRef={CurrencyRef}
                 setCurrency={setCurrency}
                 setCurrencyModal={setCurrencyModal}
                 Algorand={props.Algorand}

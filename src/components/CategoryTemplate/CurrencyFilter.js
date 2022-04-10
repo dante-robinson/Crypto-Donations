@@ -1,11 +1,7 @@
 import React, { useRef } from "react";
 import Image from "next/image";
-import OnClickOutside from "../OnClickOutside";
 
 const CurrencyFilter = (props) => {
-  const CurrencyRef = useRef();
-  OnClickOutside(CurrencyRef, () => props.setCurrencyModal(false));
-
   const selectCurrency = (ticker) => {
     props.setCurrency(ticker);
     props.setCurrencyModal(false);
@@ -13,7 +9,7 @@ const CurrencyFilter = (props) => {
 
   return (
     <div
-      ref={CurrencyRef}
+      ref={props.CurrencyRef}
       className="flex flex-col space-y-1 items-center overflow-y-scroll absolute w-28 h-96 rounded-md border-2 bg-anti-flash-white"
     >
       <ul className="flex flex-col ml-3 justify-center">
