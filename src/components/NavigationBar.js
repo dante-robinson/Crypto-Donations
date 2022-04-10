@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import OnClickOutside from "./OnClickOutside";
+import OnClickOutsideTwoRef from "./OnClickOutsideTwoRef";
 import Categories from "./NavigationBar/Categories";
 import ChooseWallet from "./NavigationBar/ChooseWallet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,7 +20,17 @@ const NavigationBar = (props) => {
   };
 
   const CategoryRef = useRef();
-  OnClickOutside(CategoryRef, () => setCategoriesOpen(false));
+  const ButtonRef = useRef();
+
+  OnClickOutsideTwoRef(CategoryRef, ButtonRef, () => setCategoriesOpen(false));
+
+  const isOpen = () => {
+    if (CategoriesOpen === false) {
+      setCategoriesOpen(true);
+    } else if (CategoriesOpen === true) {
+      setCategoriesOpen(false);
+    }
+  };
 
   return (
     <nav className="flex h-[7vh] bg-crayola-blue">
@@ -46,11 +56,8 @@ const NavigationBar = (props) => {
       <div className="flex w-screen justify-between items-center">
         <div className="flex ml-2">
           <button
-            onClick={
-              CategoriesOpen === false
-                ? () => setCategoriesOpen(true)
-                : () => setCategoriesOpen(false)
-            }
+            ref={ButtonRef}
+            onClick={() => isOpen()}
             className="text-greyish-white w-28 h-10 rounded-md"
           >
             Categories
@@ -69,7 +76,8 @@ const NavigationBar = (props) => {
           </button>
         </div>
       </div>
-      {CategoriesOpen && <Categories ref={CategoryRef} />}
+      {CategoriesOpen && <Categories CategoryRef={CategoryRef} />}
+
       {ChooseWalletOpen && (
         <ChooseWallet setChooseWalletOpen={setChooseWalletOpen} />
       )}
