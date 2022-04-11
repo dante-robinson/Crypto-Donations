@@ -64,7 +64,7 @@ const ChooseWallet = ({ setChooseWalletOpen }) => {
   });
 
   return (
-    <div className="bg-black bg-opacity-50 absolute inset-0 flex justify-center items-center">
+    <div className="bg-black overflow-hidden fixed bg-opacity-50 z-20 inset-0 flex justify-center items-center">
       <div
         ref={ref}
         className="bg-anti-flash-white w-[26rem] h-[28rem] rounded-lg"
