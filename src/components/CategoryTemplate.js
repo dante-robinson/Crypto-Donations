@@ -217,14 +217,9 @@ const CategoryTemplate = (props) => {
     return output;
   };
 
-  return (
-    <div>
-      <NavigationBar />
-
-      <div className="flex h-content w-screen flex-wrap">
-        <div className="w-screen text-center">
-          <h1 className="text-3xl font-bold p-4">{props.category} Requests</h1>
-        </div>
+  const createCurrencyFilterButton = () => {
+    if (PageRequests > 0) {
+      return (
         <div className="grid grid-rows-1 grid-cols-5 w-screen h-12 gap-6">
           <div className="col-start-2">
             <button
@@ -271,6 +266,19 @@ const CategoryTemplate = (props) => {
             )}
           </div>
         </div>
+      );
+    } else return;
+  };
+
+  return (
+    <div>
+      <NavigationBar />
+
+      <div className="flex h-content w-screen flex-wrap">
+        <div className="w-screen text-center">
+          <h1 className="text-3xl font-bold p-4">{props.category} Requests</h1>
+        </div>
+        {createCurrencyFilterButton()}
         {TotalRequests != 0 && currentPage != null ? (
           <div className="flex">{createGrid(PageRequests)}</div>
         ) : TotalRequests == 0 && currentPage != null ? (
