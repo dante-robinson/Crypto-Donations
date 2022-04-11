@@ -31,90 +31,109 @@ const CategoryTemplate = (props) => {
 
   useEffect(() => {
     if (TotalRequests == null) return;
+
+    const getPages = () => {
+      setPages(Math.ceil(TotalRequests / 15));
+    };
+
     getPages();
   }, [TotalRequests]);
 
   useEffect(() => {
     if (Pages == null) return;
+
+    const isLastPage = () => {
+      if (Pages == currentPage) {
+        setPageRequests(TotalRequests % 15);
+        setLastPage(true);
+      } else {
+        setLastPage(false);
+      }
+    };
+
     isLastPage();
   }, [Pages]);
 
   useEffect(() => {
     if (LastPage == null && currentPage == null) return;
+
+    const getPageRequests = () => {
+      if (LastPage == false) {
+        setPageRequests(15);
+      }
+    };
+
     getPageRequests();
   }, [LastPage]);
 
   useEffect(() => {
     if (!props.donation) return;
+
+    const getTotalRequests = async () => {
+      let result;
+      if (props.category === "animal") {
+        result = await props.donation.methods.animalRequests().call();
+      } else if (props.category === "Business") {
+        result = await props.donation.methods.businessRequests().call();
+      } else if (props.category === "Community") {
+        result = await props.donation.methods.communityRequests().call();
+      } else if (props.category === "Competition") {
+        result = await props.donation.methods.competitionRequests().call();
+      } else if (props.category === "Creative") {
+        result = await props.donation.methods.creativeRequests().call();
+      } else if (props.category === "Education") {
+        result = await props.donation.methods.educationRequests().call();
+      } else if (props.category === "Emergency") {
+        result = await props.donation.methods.emergencyRequests().call();
+      } else if (props.category === "Environment") {
+        result = await props.donation.methods.environmentRequests().call();
+      } else if (props.category === "Event") {
+        result = await props.donation.methods.eventRequests().call();
+      } else if (props.category === "Family") {
+        result = await props.donation.methods.familyRequests().call();
+      } else if (props.category === "Individual") {
+        result = await props.donation.methods.individualRequests().call();
+      } else if (props.category === "Medical") {
+        result = await props.donation.methods.medicalRequests().call();
+      } else if (props.category === "Memorial") {
+        result = await props.donation.methods.memorialRequests().call();
+      } else if (props.category === "Nonprofit") {
+        result = await props.donation.methods.nonprofitRequests().call();
+      } else if (props.category === "Religious") {
+        result = await props.donation.methods.religiousRequests().call();
+      } else if (props.category === "Sport") {
+        result = await props.donation.methods.sportRequests().call();
+      } else if (props.category === "Travel") {
+        result = await props.donation.methods.travelRequests().call();
+      } else if (props.category === "Volunteer") {
+        result = await props.donation.methods.volunteerRequests().call();
+      } else if (props.category === "Wish") {
+        result = await props.donation.methods.wishRequests().call();
+      }
+      setTotalRequests(result);
+    };
+
     getTotalRequests();
   }, [props.donation]);
 
   useEffect(() => {
+    const changeCurrency = async (currency) => {
+      if (currency !== "BTC") {
+        axios
+          .get(`/api/nomics?currency=${currency}`, {
+            headers: {
+              Accept: "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+          })
+          .then((response) => setConversionRate(response.data.price));
+      } else {
+        setConversionRate(1);
+      }
+    };
+
     changeCurrency(Currency);
   }, [Currency]);
-
-  const getTotalRequests = async () => {
-    let result;
-    if (props.category === "animal") {
-      result = await props.donation.methods.animalRequests().call();
-    } else if (props.category === "Business") {
-      result = await props.donation.methods.businessRequests().call();
-    } else if (props.category === "Community") {
-      result = await props.donation.methods.communityRequests().call();
-    } else if (props.category === "Competition") {
-      result = await props.donation.methods.competitionRequests().call();
-    } else if (props.category === "Creative") {
-      result = await props.donation.methods.creativeRequests().call();
-    } else if (props.category === "Education") {
-      result = await props.donation.methods.educationRequests().call();
-    } else if (props.category === "Emergency") {
-      result = await props.donation.methods.emergencyRequests().call();
-    } else if (props.category === "Environment") {
-      result = await props.donation.methods.environmentRequests().call();
-    } else if (props.category === "Event") {
-      result = await props.donation.methods.eventRequests().call();
-    } else if (props.category === "Family") {
-      result = await props.donation.methods.familyRequests().call();
-    } else if (props.category === "Individual") {
-      result = await props.donation.methods.individualRequests().call();
-    } else if (props.category === "Medical") {
-      result = await props.donation.methods.medicalRequests().call();
-    } else if (props.category === "Memorial") {
-      result = await props.donation.methods.memorialRequests().call();
-    } else if (props.category === "Nonprofit") {
-      result = await props.donation.methods.nonprofitRequests().call();
-    } else if (props.category === "Religious") {
-      result = await props.donation.methods.religiousRequests().call();
-    } else if (props.category === "Sport") {
-      result = await props.donation.methods.sportRequests().call();
-    } else if (props.category === "Travel") {
-      result = await props.donation.methods.travelRequests().call();
-    } else if (props.category === "Volunteer") {
-      result = await props.donation.methods.volunteerRequests().call();
-    } else if (props.category === "Wish") {
-      result = await props.donation.methods.wishRequests().call();
-    }
-    setTotalRequests(result);
-  };
-
-  const getPages = () => {
-    setPages(Math.ceil(TotalRequests / 15));
-  };
-
-  const isLastPage = () => {
-    if (Pages == currentPage) {
-      setPageRequests(TotalRequests % 15);
-      setLastPage(true);
-    } else {
-      setLastPage(false);
-    }
-  };
-
-  const getPageRequests = () => {
-    if (LastPage == false) {
-      setPageRequests(15);
-    }
-  };
 
   const createGrid = (PageRequests) => {
     if (PageRequests === 3 || PageRequests < 3) {
@@ -196,23 +215,6 @@ const CategoryTemplate = (props) => {
       );
     }
     return output;
-  };
-
-  const { serverRuntimeConfig } = getConfig();
-
-  const changeCurrency = async (currency) => {
-    if (currency !== "BTC") {
-      axios
-        .get(`/api/nomics?currency=${currency}`, {
-          headers: {
-            Accept: "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-        })
-        .then((response) => setConversionRate(response.data.price));
-    } else {
-      setConversionRate(1);
-    }
   };
 
   return (
