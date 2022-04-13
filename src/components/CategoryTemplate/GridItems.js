@@ -30,7 +30,7 @@ const GridItems = (props) => {
 
   useEffect(() => {
     getRequestData();
-  }, [props.conversionRate]);
+  }, [props.conversionRate, props.currentPage]);
 
   const returnCurrency = (currency) => {
     const getImage = () => {

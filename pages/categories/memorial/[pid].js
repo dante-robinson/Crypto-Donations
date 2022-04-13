@@ -26,6 +26,9 @@ import Terra from "../../../public/Terra.png";
 import ZCash from "../../../public/ZCash.png";
 
 const Memorial = (props) => {
+  const router = useRouter();
+  const currentPage = router.query.pid;
+
   return (
     <CategoryTemplate
       Algorand={Algorand}
@@ -51,7 +54,8 @@ const Memorial = (props) => {
       Stellar={Stellar}
       Terra={Terra}
       ZCash={ZCash}
-      category="Memorial"
+      currentPage={currentPage}
+      category="animal"
       donation={props.donation}
     />
   );

@@ -1,14 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/router";
 import NavigationBar from "./NavigationBar";
 import Footer from "./Footer";
 import GridItems from "./CategoryTemplate/GridItems";
 import CurrencyFilter from "./CategoryTemplate/CurrencyFilter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleDown,
+  faAngleRight,
+  faAngleLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import OnClickOutsideTwoRef from "./OnClickOutsideTwoRef";
 import axios from "axios";
 import getConfig from "next/config";
+import Link from "next/link";
 
 const CategoryTemplate = (props) => {
   const [TotalRequests, setTotalRequests] = useState(null);
@@ -19,9 +23,6 @@ const CategoryTemplate = (props) => {
   const [Currency, setCurrency] = useState("BTC");
   // Default 1 : 1 ratio for BTC
   const [ConversionRate, setConversionRate] = useState(1);
-
-  const router = useRouter();
-  const currentPage = router.query.pid;
 
   const CurrencyRef = useRef();
   const CurrencyButtonRef = useRef();
@@ -43,7 +44,7 @@ const CategoryTemplate = (props) => {
     if (Pages == null) return;
 
     const isLastPage = () => {
-      if (Pages == currentPage) {
+      if (Pages == props.currentPage) {
         setPageRequests(TotalRequests % 15);
         setLastPage(true);
       } else {
@@ -52,10 +53,10 @@ const CategoryTemplate = (props) => {
     };
 
     isLastPage();
-  }, [Pages]);
+  }, [Pages, props.currentPage]);
 
   useEffect(() => {
-    if (LastPage == null && currentPage == null) return;
+    if (LastPage == null && props.currentPage == null) return;
 
     const getPageRequests = () => {
       if (LastPage == false) {
@@ -135,46 +136,46 @@ const CategoryTemplate = (props) => {
     changeCurrency(Currency);
   }, [Currency]);
 
-  const createGrid = (PageRequests) => {
+  const createGrid = (PageRequests, currentPage) => {
     if (PageRequests === 3 || PageRequests < 3) {
       return (
         <div className="grid grid-rows-1 grid-cols-5 w-screen grid-col-3 gap-6">
-          {createBoxes(PageRequests)}
+          {createBoxes(PageRequests, currentPage)}
         </div>
       );
     } else if (PageRequests === 6 || (PageRequests < 6 && PageRequests > 3)) {
       return (
         <div className="grid grid-rows-2 grid-cols-5 w-screen grid-col-3 gap-6">
-          {createBoxes(PageRequests)}
+          {createBoxes(PageRequests, currentPage)}
         </div>
       );
     } else if (PageRequests === 9 || (PageRequests < 9 && PageRequests > 6)) {
       return (
         <div className="grid grid-rows-3 grid-cols-5 w-screen grid-col-3 gap-6">
-          {createBoxes(PageRequests)}
+          {createBoxes(PageRequests, currentPage)}
         </div>
       );
     } else if (PageRequests === 12 || (PageRequests < 12 && PageRequests > 9)) {
       return (
         <div className="grid grid-rows-4 grid-cols-5 w-screen grid-col-3 gap-6">
-          {createBoxes(PageRequests)}
+          {createBoxes(PageRequests, currentPage)}
         </div>
       );
     } else if (PageRequests > 12) {
       return (
         <div className="grid grid-rows-5 grid-cols-5 h-content w-screen grid-col-3 gap-6">
-          {createBoxes(PageRequests)}
+          {createBoxes(PageRequests, currentPage)}
         </div>
       );
     }
   };
 
-  const createBoxes = (pageRequests) => {
+  const createBoxes = (pageRequests, currentPage) => {
     let output = [];
 
     let currentRequest = 0;
-    if (currentPage != 1) {
-      currentRequest = (currentPage - 1) * 15;
+    if (props.currentPage != 1) {
+      currentRequest = (props.currentPage - 1) * 15;
     }
 
     for (let box = 0; box < pageRequests; box++) {
@@ -184,6 +185,7 @@ const CategoryTemplate = (props) => {
           key={box}
           box={box}
           conversionRate={ConversionRate}
+          currentPage={currentPage}
           _currency={Currency}
           donation={props.donation}
           currentRequest={currentRequest}
@@ -215,6 +217,133 @@ const CategoryTemplate = (props) => {
       );
     }
     return output;
+  };
+
+  const createPagesButton = (pageNumber, category, lastPage) => {
+    let back = "back";
+    let forward = "forward";
+
+    const changePageForward = (direction, pageNumber, category) => {
+      if (direction === "back") {
+        pageNumber = parseInt(pageNumber) - 1;
+      } else if (direction === "forward") {
+        pageNumber = parseInt(pageNumber) + 1;
+      }
+      let lowercaseCategory = category.toLowerCase();
+      return `/categories/${lowercaseCategory}/${pageNumber}`;
+    };
+
+    const pageNumberSize = (pageNumber) => {
+      if (pageNumber < 10) {
+        return (
+          <div className="flex w-6 h-8 rounded-md justify-center items-center bg-light-anti-flash-white border-2">
+            <p>{pageNumber}</p>
+          </div>
+        );
+      } else if (pageNumber > 9 && pageNumber < 100) {
+        return (
+          <div className="flex w-8 h-8 rounded-md justify-center items-center bg-light-anti-flash-white border-2">
+            <p>{pageNumber}</p>
+          </div>
+        );
+      } else if (pageNumber > 99 && pageNumber < 1000) {
+        return (
+          <div className="flex w-10 h-8 rounded-md justify-center items-center bg-light-anti-flash-white border-2">
+            <p>{pageNumber}</p>
+          </div>
+        );
+      } else if (pageNumber > 999 && pageNumber < 10000) {
+        return (
+          <div className="flex w-12 h-8 rounded-md justify-center items-center bg-light-anti-flash-white border-2">
+            <p>{pageNumber}</p>
+          </div>
+        );
+      } else {
+        return (
+          <div className="flex w-14 h-8 rounded-md justify-center items-center bg-light-anti-flash-white border-2">
+            <p>{pageNumber}</p>
+          </div>
+        );
+      }
+    };
+
+    const returnButtons = () => {
+      if (pageNumber == 1 && lastPage === false) {
+        return (
+          <div className="flex space-x-1 justify-end items-end">
+            {pageNumberSize(pageNumber)}
+            <Link
+              href={changePageForward(forward, pageNumber, category)}
+              passHref
+            >
+              <a className="flex w-6 h-8 rounded-md border-2 bg-anti-flash-white">
+                <FontAwesomeIcon
+                  className="flex w-6 justify-self-center self-center"
+                  icon={faAngleRight}
+                />
+              </a>
+            </Link>
+          </div>
+        );
+      } else if (pageNumber == 1 && lastPage === true) {
+        return (
+          <div className="flex space-x-1 justify-end items-end">
+            {pageNumberSize(pageNumber)}
+          </div>
+        );
+      } else if (pageNumber != 1 && lastPage === true) {
+        return (
+          <div className="flex space-x-1 justify-end items-end">
+            <Link href={changePageForward(back, pageNumber, category)} passHref>
+              <a className="flex w-6 h-8 rounded-md border-2 bg-anti-flash-white">
+                <FontAwesomeIcon
+                  className="flex w-6 justify-self-center self-center"
+                  icon={faAngleLeft}
+                />
+              </a>
+            </Link>
+            {pageNumberSize(pageNumber)}
+          </div>
+        );
+      } else {
+        return (
+          <div className="flex space-x-1 justify-end items-end">
+            <Link href={changePageForward(back, pageNumber, category)} passHref>
+              <a className="flex w-6 h-8 rounded-md border-2 bg-anti-flash-white">
+                <FontAwesomeIcon
+                  className="flex w-6 justify-self-center self-center"
+                  icon={faAngleLeft}
+                />
+              </a>
+            </Link>
+            {pageNumberSize(pageNumber)}
+            <Link
+              href={changePageForward(forward, pageNumber, category)}
+              passHref
+            >
+              <a className="flex w-6 h-8 rounded-md border-2 bg-anti-flash-white">
+                <FontAwesomeIcon
+                  className="flex w-6 justify-self-center self-center"
+                  icon={faAngleRight}
+                />
+              </a>
+            </Link>
+            ;
+          </div>
+        );
+      }
+    };
+
+    if (PageRequests > 0) {
+      return (
+        <div className="grid grid-rows-1 grid-cols-5 w-screen h-12 gap-6">
+          <div className="col-start-3"></div>
+          <div className="flex space-x-1 justify-end items-end">
+            {returnButtons()}
+          </div>
+        </div>
+      );
+    } else return;
   };
 
   const createCurrencyFilterButton = () => {
@@ -273,15 +402,16 @@ const CategoryTemplate = (props) => {
   return (
     <div>
       <NavigationBar />
-
       <div className="flex h-content w-screen flex-wrap">
         <div className="w-screen text-center">
           <h1 className="text-3xl font-bold p-4">{props.category} Requests</h1>
         </div>
         {createCurrencyFilterButton()}
-        {TotalRequests != 0 && currentPage != null ? (
-          <div className="flex">{createGrid(PageRequests)}</div>
-        ) : TotalRequests == 0 && currentPage != null ? (
+        {TotalRequests != 0 && props.currentPage != null ? (
+          <div className="flex">
+            {createGrid(PageRequests, props.currentPage)}
+          </div>
+        ) : TotalRequests == 0 && props.currentPage != null ? (
           <p className="flex text-2xl w-screen h-[80vh] items-center justify-center">
             There are no {props.category} Requests yet!
           </p>
@@ -290,6 +420,7 @@ const CategoryTemplate = (props) => {
             Loading...
           </p>
         )}
+        {createPagesButton(props.currentPage, props.category, LastPage)}
       </div>
       <Footer />
     </div>

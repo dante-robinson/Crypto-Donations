@@ -26,6 +26,9 @@ import Terra from "../../../public/Terra.png";
 import ZCash from "../../../public/ZCash.png";
 
 const Event = (props) => {
+  const router = useRouter();
+  const currentPage = router.query.pid;
+
   return (
     <CategoryTemplate
       Algorand={Algorand}
@@ -51,7 +54,8 @@ const Event = (props) => {
       Stellar={Stellar}
       Terra={Terra}
       ZCash={ZCash}
-      category="Event"
+      currentPage={currentPage}
+      category="animal"
       donation={props.donation}
     />
   );
