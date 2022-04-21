@@ -2,7 +2,7 @@ require("chai").use(require("chai-as-promised")).should();
 const Donation = artifacts.require("./Storage.sol");
 
 contract("Donation", (accounts) => {
-  let lottery;
+  let donation;
   before(async () => {
     donation = await Donation.deployed();
   });

@@ -2,9 +2,11 @@ import React from "react";
 
 const Tips = () => {
   return (
-    <div className="grid grid-rows-tips anti-flash-white">
-      <h1 className="row-start-1 text-4xl justify-self-center">Tips</h1>
-      <ul className="p-4 row-start-2 space-y-2 list-none text-center justify-self-center">
+    <div className="flex flex-wrap justify-center border-2 drop-shadow-sm rounded-md">
+      <h1 className="text-4xl pt-8 pb-6 font-semibold justify-self-center">
+        Tips
+      </h1>
+      <ul className="pb-8 space-y-2 px-4 text-center justify-self-center">
         <li>
           Use a hardware wallet like the Ledger Nano X or Trezor Model T. This
           ensures that a you own your private keys so a company or exchange

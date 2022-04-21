@@ -2,8 +2,9 @@ import Head from "next/head";
 import React from "react";
 import NavigationBar from "../src/components/NavigationBar";
 import Home from "../src/components/Home";
+import Footer from "../src/components/Footer";
 
-const HomePage = () => {
+const HomePage = (props) => {
   return (
     <div>
       <Head>
@@ -12,7 +13,8 @@ const HomePage = () => {
       </Head>
 
       <NavigationBar />
-      <Home />
+      <Home donation={props.donation} />
+      <Footer />
     </div>
   );
 };

@@ -1,14 +1,16 @@
 import React from "react";
+import ListRequests from "./Home/ListRequests";
+import Notes from "./Home/Notes";
 import Tips from "./Home/Tips";
 import HowItWorks from "./Home/HowItWorks";
-import Footer from "./Footer";
 
-const Home = () => {
+const Home = (props) => {
   return (
-    <div className="w-screen space-y-8">
+    <div className="px-96 h-[141.5vh] w-screen space-y-2">
+      <ListRequests donation={props.donation} />
+      <Notes />
       <HowItWorks />
       <Tips />
-      <Footer />
     </div>
   );
 };
