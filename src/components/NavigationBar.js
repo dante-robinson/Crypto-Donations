@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import Link from "next/link";
 import OnClickOutsideTwoRef from "./OnClickOutsideTwoRef";
 import Categories from "./NavigationBar/Categories";
 import ChooseWallet from "./NavigationBar/ChooseWallet";
@@ -33,8 +34,8 @@ const NavigationBar = (props) => {
   };
 
   return (
-    <nav className="flex h-[7vh] bg-crayola-blue">
-      <div className="flex items-center">
+    <nav className="flex justify-between h-[7vh] bg-crayola-blue">
+      <div className="flex w-screen items-center">
         <FontAwesomeIcon
           className="text-greyish-white ml-6"
           icon={faMagnifyingGlass}
@@ -52,9 +53,8 @@ const NavigationBar = (props) => {
             className="flex ml-2 self-center bg-greyish-white border-none outline-none w-64 h-8 rounded-2xl"
           />
         </div>
-      </div>
-      <div className="flex w-screen justify-between items-center">
-        <div className="flex ml-2">
+
+        <div className="flex w-screen ml-2 justify-start">
           <button
             ref={ButtonRef}
             onClick={() => isOpen()}
@@ -67,7 +67,14 @@ const NavigationBar = (props) => {
             />
           </button>
         </div>
-        <div className="flex mr-4 justify-end">
+
+        <div className="flex w-screen mr-72 justify-center text-greyish-white">
+          <Link href="/" passHref>
+            <a className="text-2xl font-bold">Unstoppable Donations</a>
+          </Link>
+        </div>
+
+        <div className="flex mr-4 w-screen justify-end">
           <button
             onClick={() => setChooseWalletOpen(true)}
             className="text-greyish-white border-2 w-24 h-10 hover:bg-darker-blue rounded-md text-center"
@@ -76,6 +83,7 @@ const NavigationBar = (props) => {
           </button>
         </div>
       </div>
+
       {CategoriesOpen && <Categories CategoryRef={CategoryRef} />}
 
       {ChooseWalletOpen && (
