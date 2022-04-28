@@ -16,22 +16,42 @@ const HomeRequestItems = (props) => {
   const [Description, setDescription] = useState(null);
   const [Amount, setAmount] = useState(null);
   const [Score, setScore] = useState(null);
-
-  const getRequestData = async () => {
-    let response = await props.donation.methods
-      .Requests(props.category, BigInt(props.currentRequest))
-      .call();
-    let description = response.description;
-    setTitle(response.title);
-    setDescription(description.substring(0, 180));
-    let amount = response.amount / props.conversionRate;
-    setAmount(amount.toFixed(2).substring(0, 10));
-    setScore(response.score);
-  };
+  const [Response, setResponse] = useState(null);
 
   useEffect(() => {
+    if (props.requestArray === []) return;
+    const getResponse = async () => {
+      let currentNumber = props.box;
+
+      let response = await props.donation.methods
+        .Requests(props.category, props.requestArray[currentNumber])
+        .call();
+      return response;
+    };
+
+    function getValues() {
+      return getResponse().then((value) => {
+        setResponse(value);
+      });
+    }
+
+    getValues();
+  }, [props.requestArray]);
+
+  useEffect(() => {
+    const getRequestData = async () => {
+      if (Response === null) return;
+      console.log(Response);
+      let description = Response.description;
+      setTitle(Response.title);
+      setDescription(description.substring(0, 120));
+      let amount = Response.amount / 1;
+      setAmount(amount.toFixed(2).substring(0, 10));
+      setScore(Response.score);
+    };
+
     getRequestData();
-  }, []);
+  }, [Response]);
 
   return (
     <button className="flex w-content h-content border-4 border-bg-darker-white bg-light-anti-flash-white w-full h-96 rounded-md">
