@@ -8,7 +8,6 @@ const ListRequests = (props) => {
 
   useEffect(() => {
     const getRandomCategory = async () => {
-      let i;
       /* Once every category has at least 4 requests this function can be deleted
       along with its useEffect. The uncommented part of getRequests function will need
       to be deleted and the comnmented out part can be uncommented. */
@@ -36,7 +35,7 @@ const ListRequests = (props) => {
       let eligibleCategories = [];
 
       // Add all categories to Array if they have over 4 Requests
-      for (i = 0; i < 19; i++) {
+      for (let i = 0; i < 19; i++) {
         if (Categories[i] >= 4) {
           if (i == 0) {
             eligibleCategories.push("Animal");
@@ -208,13 +207,13 @@ const ListRequests = (props) => {
       // Make sure to not load same request multiple times
 
       if (requestTwo == requestOne) {
-        for (i = 0; requestTwo == requestOne; i++) {
+        for (let i = 0; requestTwo == requestOne; i++) {
           requestTwo = Math.ceil(Math.random() * Requests);
         }
       }
       if (requestThree == requestOne || requestTwo) {
         for (
-          i = 0;
+          let i = 0;
           requestThree == requestOne || requestThree == requestTwo;
           i++
         ) {
@@ -223,7 +222,7 @@ const ListRequests = (props) => {
       }
       if (requestFour == requestOne || requestTwo || requestThree) {
         for (
-          i = 0;
+          let i = 0;
           requestFour == requestOne ||
           requestFour == requestTwo ||
           requestFour == requestThree;
