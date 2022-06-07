@@ -33,31 +33,31 @@ const Categories = ({ CategoryRef, setCategoriesOpen }) => {
       <ul className="flex flex-col p-6 space-y-4">
         <li>
           <FontAwesomeIcon className="mr-2" icon={faDog} width="20px" />
-          <Link href="/categories/animal/1" passHref>
+          <Link href="/categories/animal/page/1" passHref>
             <a className="hover:underline underline-offset-4">Animal</a>
           </Link>
         </li>
         <li>
           <FontAwesomeIcon className="mr-2" icon={faBuilding} width="20px" />
-          <Link href="/categories/business/1" passHref>
+          <Link href="/categories/business/page/1" passHref>
             <a className="hover:underline underline-offset-4">Business</a>
           </Link>
         </li>
         <li>
           <FontAwesomeIcon className="mr-2" icon={faUsers} width="20px" />
-          <Link href="/categories/community/1" passHref>
+          <Link href="/categories/community/page/1" passHref>
             <a className="hover:underline underline-offset-4">Community</a>
           </Link>
         </li>
         <li>
           <FontAwesomeIcon className="mr-2" icon={faTrophy} width="20px" />
-          <Link href="/categories/competition/1" passHref>
+          <Link href="/categories/competition/page/1" passHref>
             <a className="hover:underline underline-offset-4">Competition</a>
           </Link>
         </li>
         <li>
           <FontAwesomeIcon className="mr-2" icon={faPaintbrush} width="20px" />
-          <Link href="/categories/creative/1" passHref>
+          <Link href="/categories/creative/page/1" passHref>
             <a className="hover:underline underline-offset-4">Creative</a>
           </Link>
         </li>
@@ -65,19 +65,19 @@ const Categories = ({ CategoryRef, setCategoriesOpen }) => {
       <ul className="flex flex-col p-6 space-y-4">
         <li>
           <FontAwesomeIcon className="mr-2" icon={faBook} width="20px" />
-          <Link href="/categories/education/1" passHref>
+          <Link href="/categories/education/page/1" passHref>
             <a className="hover:underline underline-offset-4">Education</a>
           </Link>
         </li>
         <li>
           <FontAwesomeIcon className="mr-2" icon={faKitMedical} width="20px" />
-          <Link href="/categories/emergency/1" passHref>
+          <Link href="/categories/emergency/page/1" passHref>
             <a className="hover:underline underline-offset-4">Emergency</a>
           </Link>
         </li>
         <li>
           <FontAwesomeIcon className="mr-2" icon={faSeedling} width="20px" />
-          <Link href="/categories/environment/1" passHref>
+          <Link href="/categories/environment/page/1" passHref>
             <a className="hover:underline underline-offset-4">Environment</a>
           </Link>
         </li>
@@ -87,13 +87,13 @@ const Categories = ({ CategoryRef, setCategoriesOpen }) => {
             icon={faCalendarDays}
             width="20px"
           />
-          <Link href="/categories/event/1" passHref>
+          <Link href="/categories/event/page/1" passHref>
             <a className="hover:underline underline-offset-4">Event</a>
           </Link>
         </li>
         <li>
           <FontAwesomeIcon className="mr-2" icon={faPeopleRoof} width="20px" />
-          <Link href="/categories/family/1" passHref>
+          <Link href="/categories/family/page/1" passHref>
             <a className="hover:underline underline-offset-4">Family</a>
           </Link>
         </li>
@@ -101,25 +101,25 @@ const Categories = ({ CategoryRef, setCategoriesOpen }) => {
       <ul className="flex flex-col p-6 space-y-4">
         <li>
           <FontAwesomeIcon className="mr-2" icon={faPerson} width="20px" />
-          <Link href="/categories/individual/1" passHref>
+          <Link href="/categories/individual/page/1" passHref>
             <a className="hover:underline underline-offset-4">Individual</a>
           </Link>
         </li>
         <li>
           <FontAwesomeIcon className="mr-2" icon={faSyringe} width="20px" />
-          <Link href="/categories/medical/1" passHref>
+          <Link href="/categories/medical/page/1" passHref>
             <a className="hover:underline underline-offset-4">Medical</a>
           </Link>
         </li>
         <li>
           <FontAwesomeIcon className="mr-2" icon={faCross} width="20px" />
-          <Link href="/categories/memorial/1" passHref>
+          <Link href="/categories/memorial/page/1" passHref>
             <a className="hover:underline underline-offset-4">Memorial</a>
           </Link>
         </li>
         <li>
           <FontAwesomeIcon className="mr-2" icon={faGift} width="20px" />
-          <Link href="/categories/nonprofit/1" passHref>
+          <Link href="/categories/nonprofit/page/1" passHref>
             <a className="hover:underline underline-offset-4">Non-Profit</a>
           </Link>
         </li>
@@ -129,7 +129,7 @@ const Categories = ({ CategoryRef, setCategoriesOpen }) => {
             icon={faHandsPraying}
             width="20px"
           />
-          <Link href="/categories/religious/1" passHref>
+          <Link href="/categories/religious/page/1" passHref>
             <a className="hover:underline underline-offset-4">Religious</a>
           </Link>
         </li>
@@ -141,7 +141,7 @@ const Categories = ({ CategoryRef, setCategoriesOpen }) => {
             icon={faBaseballBatBall}
             width="20px"
           />
-          <Link href="/categories/sports/1" passHref>
+          <Link href="/categories/sports/page/1" passHref>
             <a className="hover:underline underline-offset-4">Sports</a>
           </Link>
         </li>
@@ -151,7 +151,7 @@ const Categories = ({ CategoryRef, setCategoriesOpen }) => {
             icon={faPlaneDeparture}
             width="20px"
           />
-          <Link href="/categories/travel/1" passHref>
+          <Link href="/categories/travel/page/1" passHref>
             <a className="hover:underline underline-offset-4">Travel</a>
           </Link>
         </li>
@@ -161,7 +161,7 @@ const Categories = ({ CategoryRef, setCategoriesOpen }) => {
             icon={faHandshakeAngle}
             width="20px"
           />
-          <Link href="/categories/volunteer/1" passHref>
+          <Link href="/categories/volunteer/page/1" passHref>
             <a className="hover:underline underline-offset-4">Volunteer</a>
           </Link>
         </li>
@@ -171,7 +171,7 @@ const Categories = ({ CategoryRef, setCategoriesOpen }) => {
             icon={faStarHalfStroke}
             width="20px"
           />
-          <Link href="/categories/wishes/1" passHref>
+          <Link href="/categories/wishes/page/1" passHref>
             <a className="hover:underline underline-offset-4">Wishes</a>
           </Link>
         </li>
