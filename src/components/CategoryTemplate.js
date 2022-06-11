@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import NavigationBar from "./NavigationBar";
 import Footer from "./Footer";
 import GridItems from "./CategoryTemplate/GridItems";
-import CurrencyFilter from "./CategoryTemplate/CurrencyFilter";
+import CurrencyFilter from "./CurrencyFilter";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleDown,

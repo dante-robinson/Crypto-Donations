@@ -11,6 +11,7 @@ module.exports = {
         tips: "5vh 20vh",
         // Left over room for image if added later
         requestList: "0.25fr 0.50fr 0.50fr 0.15fr",
+        requestTemplate: "7rem 24rem 25rem 12rem",
       },
       colors: {
         "crayola-blue": "#1d81fa",
