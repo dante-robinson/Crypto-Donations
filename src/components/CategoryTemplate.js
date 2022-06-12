@@ -230,7 +230,7 @@ const CategoryTemplate = (props) => {
         pageNumber = parseInt(pageNumber) + 1;
       }
       let lowercaseCategory = category.toLowerCase();
-      return `/categories/${lowercaseCategory}/${pageNumber}`;
+      return `/categories/${lowercaseCategory}/page/${pageNumber}`;
     };
 
     const pageNumberSize = (pageNumber) => {
