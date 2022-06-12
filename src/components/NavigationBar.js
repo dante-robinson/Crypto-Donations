@@ -34,8 +34,8 @@ const NavigationBar = (props) => {
   };
 
   return (
-    <nav className="flex justify-between h-[7vh] bg-crayola-blue">
-      <div className="flex w-screen items-center">
+    <nav className="relative w-full flex justify-between h-[7vh] bg-crayola-blue">
+      <div className="flex w-full items-center">
         <FontAwesomeIcon
           className="text-greyish-white ml-6"
           icon={faMagnifyingGlass}
