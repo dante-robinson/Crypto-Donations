@@ -192,12 +192,6 @@ const GridItems = (props) => {
             />
           </div>
         );
-      } else if (currency === "LUNA") {
-        return (
-          <div className="flex mr-1">
-            <Image src={props.Terra} alt="Terra Logo" width="24" height="16" />
-          </div>
-        );
       } else if (currency === "MATIC") {
         return (
           <div className="flex mr-1">
@@ -295,7 +289,7 @@ const GridItems = (props) => {
             <h4 className="flex w-full font-semibold text-xl justify-center pt-2">
               {Title}
             </h4>
-            <p className="row-start-3 flex w-full justify-center text-md">
+            <p className="row-start-3 flex w-full mx-2.5 justify-center text-md">
               {Description}
             </p>
             <div className="row-start-4 flex justify-between items-end pb-2 w-full">
@@ -318,7 +312,7 @@ const GridItems = (props) => {
             <h4 className="flex w-full font-semibold text-xl justify-center pt-2">
               {Title}
             </h4>
-            <p className="row-start-3 flex w-full justify-center text-md">
+            <p className="row-start-3 flex w-full mx-2.5 justify-center text-md">
               {Description}
             </p>
             <div className="row-start-4 flex justify-between items-end pb-2 w-full">

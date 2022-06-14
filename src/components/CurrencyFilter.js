@@ -251,22 +251,6 @@ const CurrencyFilter = (props) => {
         <li>
           <button
             className="flex hover:underline underline-offset-2"
-            onClick={() => selectCurrency("LUNA")}
-          >
-            <div className="mr-1">
-              <Image
-                src={props.Terra}
-                alt="Terra Logo"
-                width="16"
-                height="16"
-              />
-            </div>
-            LUNA
-          </button>
-        </li>
-        <li>
-          <button
-            className="flex hover:underline underline-offset-2"
             onClick={() => selectCurrency("MATIC")}
           >
             <div className="mr-1">

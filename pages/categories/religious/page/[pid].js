@@ -22,7 +22,6 @@ import Polygon from "../../../../public/Polygon.png";
 import Ripple from "../../../../public/Ripple.png";
 import Solana from "../../../../public/Solana.png";
 import Stellar from "../../../../public/Stellar.png";
-import Terra from "../../../../public/Terra.png";
 import ZCash from "../../../../public/ZCash.png";
 
 const Religious = (props) => {
@@ -52,7 +51,6 @@ const Religious = (props) => {
       Ripple={Ripple}
       Solana={Solana}
       Stellar={Stellar}
-      Terra={Terra}
       ZCash={ZCash}
       currentPage={currentPage}
       category="animal"
