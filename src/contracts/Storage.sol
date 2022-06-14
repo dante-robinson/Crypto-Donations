@@ -40,8 +40,7 @@ contract Storage {
 
   struct Contributor {
     uint256 amountDonated;
-    string name;
-    string contributorAddress;
+    address contributorAddress;
     uint256 id;
   }
 
@@ -288,16 +287,15 @@ contract Storage {
     Requests[_category][_requestId] = Request(_title, _description, _requestId, _amount, _totalOrganizers, _totalContributors, _score, _creator, _totalPosts);
   }
 
+  // NEEDS FIXED DOESNT SEND PAYMENT TO CONTRACT
   function addContributor(
     string memory _category,
     uint256 _requestId,
-    string memory _name,
     uint256 _amountDonated,
-    string memory _contributorAddress
+    address _contributorAddress
   ) public {
     uint256 _totalContributors = Requests[_category][_requestId].totalContributors;
-    // _name & _contributorAddress in UI should be allowed to be listed as anonymous
-    Contributors[_category][_requestId][_totalContributors] = Contributor(_amountDonated, _name, _contributorAddress, _totalContributors);
+    Contributors[_category][_requestId][_totalContributors] = Contributor(_amountDonated, _contributorAddress, _totalContributors);
     Requests[_category][_requestId].totalContributors++;
   }
 
