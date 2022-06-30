@@ -203,17 +203,6 @@ const GridItems = (props) => {
             />
           </div>
         );
-      } else if (currency === "ONE") {
-        return (
-          <div className="flex mr-1">
-            <Image
-              src={props.Harmony}
-              alt="Harmony Logo"
-              width="24"
-              height="16"
-            />
-          </div>
-        );
       } else if (currency === "SOL") {
         return (
           <div className="flex mr-1">

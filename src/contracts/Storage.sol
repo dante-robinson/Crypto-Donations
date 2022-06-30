@@ -51,7 +51,7 @@ contract Storage {
     /* Coins are chosen based on being meant for medium of exchange with high
     transaction volume at the time. ADA and ETH are there aswell for smart
     contract support if people are interested in using that. */
-    string[22] addresses;
+    string[21] addresses;
     /* index 0 = btcAddress;
     index 1 = bchAddress;
     index 2 = adaAddress;
@@ -73,12 +73,11 @@ contract Storage {
     index 13 = egldAddress;
     index 14 = etcAddress;
     index 15 = ftmAddress;
-    index 16 = oneAddress;
-    index 17 = dotAddress;
+    index 16 = dotAddress;
     index 17 = maticAddress;
-    index 19 = solAddress;
-    index 20 = xlmAddress;
-    index 21 = xrpAddress; */
+    index 18 = solAddress;
+    index 19 = xlmAddress;
+    index 20 = xrpAddress; */
   }
 
   // Just to return Organizer addresses array in UI/tests
@@ -194,7 +193,7 @@ contract Storage {
       _addresses[3], _addresses[4], _addresses[5], _addresses[6], _addresses[7],
       _addresses[8], _addresses[9], _addresses[10], _addresses[11], _addresses[12],
       _addresses[13], _addresses[14], _addresses[15], _addresses[16], _addresses[17],
-      _addresses[18], _addresses[19], _addresses[20], _addresses[21]
+      _addresses[18], _addresses[19], _addresses[20]
       ]
     );
     Requests[_category][_requestId].totalOrganizers++;
@@ -220,7 +219,7 @@ contract Storage {
       _addresses[3], _addresses[4], _addresses[5], _addresses[6], _addresses[7],
       _addresses[8], _addresses[9], _addresses[10], _addresses[11], _addresses[12],
       _addresses[13], _addresses[14], _addresses[15], _addresses[16], _addresses[17],
-      _addresses[18], _addresses[19], _addresses[20], _addresses[21]
+      _addresses[18], _addresses[19], _addresses[20]
       ]
     );
   }

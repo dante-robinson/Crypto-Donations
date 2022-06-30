@@ -14,7 +14,6 @@ import Elrond from "../../../../public/Elrond.png";
 import Ethereum from "../../../../public/Ethereum.png";
 import EthereumClassic from "../../../../public/EthereumClassic.png";
 import Fantom from "../../../../public/Fantom.png";
-import Harmony from "../../../../public/Harmony.png";
 import Litecoin from "../../../../public/Litecoin.png";
 import Monero from "../../../../public/Monero.png";
 import Polkadot from "../../../../public/Polkadot.png";
@@ -43,7 +42,6 @@ const Community = (props) => {
       Ethereum={Ethereum}
       EthereumClassic={EthereumClassic}
       Fantom={Fantom}
-      Harmony={Harmony}
       Litecoin={Litecoin}
       Monero={Monero}
       Polkadot={Polkadot}

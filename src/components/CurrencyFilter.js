@@ -267,22 +267,6 @@ const CurrencyFilter = (props) => {
         <li>
           <button
             className="flex hover:underline underline-offset-2"
-            onClick={() => selectCurrency("ONE")}
-          >
-            <div className="mr-1">
-              <Image
-                src={props.Harmony}
-                alt="Harmony Logo"
-                width="16"
-                height="16"
-              />
-            </div>
-            ONE
-          </button>
-        </li>
-        <li>
-          <button
-            className="flex hover:underline underline-offset-2"
             onClick={() => selectCurrency("SOL")}
           >
             <div className="mr-1">
