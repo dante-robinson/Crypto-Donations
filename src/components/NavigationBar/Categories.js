@@ -28,7 +28,7 @@ const Categories = ({ CategoryRef, setCategoriesOpen }) => {
   return (
     <div
       ref={CategoryRef}
-      className="flex absolute mt-16 items-center justify-center space-x-6 bg-anti-flash-white w-screen h-56 border-greyish-white border-2 rounded-md"
+      className="flex absolute mt-16 items-center justify-center space-x-6 bg-anti-flash-white w-full h-56 border-greyish-white border-2 rounded-md"
     >
       <ul className="flex flex-col p-6 space-y-4">
         <li>
