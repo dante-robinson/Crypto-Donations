@@ -13,6 +13,7 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import OnClickOutsideTwoRef from "./OnClickOutsideTwoRef";
 import CurrencyFilter from "./CurrencyFilter";
+import CurrencyIcon from "./CurrencyIcon";
 import axios from "axios";
 import getConfig from "next/config";
 
@@ -21,12 +22,33 @@ const RequestTemplate = (props) => {
   const [Currency, setCurrency] = useState("BTC");
   // Default 1 : 1 ratio for BTC
   const [ConversionRate, setConversionRate] = useState(1);
+  const [Title, setTitle] = useState(null);
+  const [Description, setDescription] = useState(null);
+  const [Amount, setAmount] = useState(null);
+  const [Score, setScore] = useState(null);
 
   const CurrencyRef = useRef();
   const CurrencyButtonRef = useRef();
   OnClickOutsideTwoRef(CurrencyRef, CurrencyButtonRef, () =>
     setCurrencyModal(false)
   );
+
+  const getRequestData = async () => {
+    let response = await props.donation.methods
+      .Requests(props.category, BigInt(props.currentRequest))
+      .call();
+    let description = response.description;
+    setTitle(response.title);
+    setDescription(description.substring(0, 180));
+    let amount = response.amount / ConversionRate;
+    setAmount(amount.toFixed(2).substring(0, 10));
+    setScore(response.score);
+    console.log(response);
+  };
+
+  useEffect(() => {
+    getRequestData();
+  });
 
   useEffect(() => {
     const changeCurrency = async (currency) => {
@@ -49,49 +71,63 @@ const RequestTemplate = (props) => {
 
   const createCurrencyFilterButton = () => {
     return (
-      <div className="col-start-3 row-start-3 flex justify-self-end py-36 px-4 h-12 gap-6">
-        <button
-          ref={CurrencyButtonRef}
-          onClick={
-            CurrencyModal === false
-              ? () => setCurrencyModal(true)
-              : () => setCurrencyModal(false)
-          }
-          className="w-28 h-8 rounded-md border-2 bg-anti-flash-white"
-        >
-          <FontAwesomeIcon className="mr-2" icon={faAngleDown} />
-          {Currency}
-        </button>
-        {CurrencyModal && (
-          <CurrencyFilter
-            CurrencyRef={CurrencyRef}
-            setCurrency={setCurrency}
-            setCurrencyModal={setCurrencyModal}
-            Algorand={props.Algorand}
-            Avalanche={props.Avalanche}
-            Bitcoin={props.Bitcoin}
-            BitcoinCash={props.BitcoinCash}
-            BSC={props.BSC}
-            Cardano={props.Cardano}
-            Cosmos={props.Cosmos}
-            Dash={props.Dash}
-            Dogecoin={props.Dogecoin}
-            Elrond={props.Elrond}
-            Ethereum={props.Ethereum}
-            EthereumClassic={props.EthereumClassic}
-            Fantom={props.Fantom}
-            Harmony={props.Harmony}
-            Litecoin={props.Litecoin}
-            Monero={props.Monero}
-            Polkadot={props.Polkadot}
-            Polygon={props.Polygon}
-            Ripple={props.Ripple}
-            Solana={props.Solana}
-            Stellar={props.Stellar}
-            Terra={props.Terra}
-            ZCash={props.ZCash}
-          />
-        )}
+      <div className="col-start-3 row-start-3 flex justify-self-end py-36 px-4 h-12 gap-4">
+        <div className="flex py-1">
+          <div className="px-2">{Amount}</div>
+          <div>
+            {
+              <CurrencyIcon
+                Bitcoin={props.Bitcoin}
+                BitcoinCash={props.BitcoinCash}
+                Cardano={props.Cardano}
+                Dash={props.Dash}
+                Dogecoin={props.Dogecoin}
+                Ethereum={props.Ethereum}
+                Litecoin={props.Litecoin}
+                Monero={props.Monero}
+                Polygon={props.Polygon}
+                Ripple={props.Ripple}
+                Stellar={props.Stellar}
+                ZCash={props.ZCash}
+                Currency={Currency}
+              />
+            }
+          </div>
+        </div>
+
+        <div>
+          <button
+            ref={CurrencyButtonRef}
+            onClick={
+              CurrencyModal === false
+                ? () => setCurrencyModal(true)
+                : () => setCurrencyModal(false)
+            }
+            className="w-28 h-8 rounded-md border-2 bg-anti-flash-white"
+          >
+            <FontAwesomeIcon className="mr-2" icon={faAngleDown} />
+            {Currency}
+          </button>
+          {CurrencyModal && (
+            <CurrencyFilter
+              CurrencyRef={CurrencyRef}
+              setCurrency={setCurrency}
+              setCurrencyModal={setCurrencyModal}
+              Bitcoin={props.Bitcoin}
+              BitcoinCash={props.BitcoinCash}
+              Cardano={props.Cardano}
+              Dash={props.Dash}
+              Dogecoin={props.Dogecoin}
+              Ethereum={props.Ethereum}
+              Litecoin={props.Litecoin}
+              Monero={props.Monero}
+              Polygon={props.Polygon}
+              Ripple={props.Ripple}
+              Stellar={props.Stellar}
+              ZCash={props.ZCash}
+            />
+          )}
+        </div>
       </div>
     );
   };
@@ -101,10 +137,10 @@ const RequestTemplate = (props) => {
       <NavigationBar />
       <div className="flex flex-wrap">
         <div className="grid grid-cols-3 grid-rows-requestTemplate w-screen mx-[20vw]">
-          <h2 className="text-2xl font-bold self-end pb-2">Title</h2>
+          <h2 className="text-2xl font-bold self-end pb-2">{Title}</h2>
           <div className="col-start-3 flex self-end justify-self-end">
             <FontAwesomeIcon className="text-2xl pb-2" icon={Upvote} />
-            <p className="px-2">0</p>
+            <p className="px-2">{Score}</p>
             <FontAwesomeIcon className="text-2xl pr-5" icon={Downvote} />
           </div>
 
@@ -115,49 +151,49 @@ const RequestTemplate = (props) => {
             <ul className="flex flex-col">
               <li className="flex my-2">
                 <div className="border h-12 w-12 rounded-md"></div>
-                <div classname="flex self-center">
+                <div>
                   <h4 className="text-xs px-3 py-1">Address</h4>
-                  <p className="flex px-3 py-1 text-xs">1 BTC</p>
+                  <p className="flex px-3 py-1 text-xs">1 MATIC</p>
                 </div>
               </li>
               <hr className="row-start-5 bg-greyish-white w-80 h-0.5 rounded-sm"></hr>
               <li className="flex my-3">
                 <div className="border h-12 w-12 rounded-md"></div>
-                <div classname="flex self-center">
+                <div>
                   <h4 className="text-xs px-3 py-1">Address</h4>
-                  <p className="flex px-3 py-1 text-xs">1 BTC</p>
+                  <p className="flex px-3 py-1 text-xs">1 MATIC</p>
                 </div>
               </li>
               <hr className="row-start-5 bg-greyish-white w-80 h-0.5 rounded-sm"></hr>
               <li className="flex my-3">
                 <div className="border h-12 w-12 rounded-md"></div>
-                <div classname="flex self-center">
+                <div>
                   <h4 className="text-xs px-3 py-1">Address</h4>
-                  <p className="flex px-3 py-1 text-xs">1 BTC</p>
+                  <p className="flex px-3 py-1 text-xs">1 MATIC</p>
                 </div>
               </li>
               <hr className="row-start-5 bg-greyish-white w-80 h-0.5 rounded-sm"></hr>
               <li className="flex my-3">
                 <div className="border h-12 w-12 rounded-md"></div>
-                <div classname="flex self-center">
+                <div>
                   <h4 className="text-xs px-3 py-1">Address</h4>
-                  <p className="flex px-3 py-1 text-xs">1 BTC</p>
+                  <p className="flex px-3 py-1 text-xs">1 MATIC</p>
                 </div>
               </li>
               <hr className="row-start-5 bg-greyish-white w-80 h-0.5 rounded-sm"></hr>
               <li className="flex my-3">
                 <div className="border h-12 w-12 rounded-md"></div>
-                <div classname="flex self-center">
+                <div>
                   <h4 className="text-xs px-3 py-1">Address</h4>
-                  <p className="flex px-3 py-1 text-xs">1 BTC</p>
+                  <p className="flex px-3 py-1 text-xs">1 MATIC</p>
                 </div>
               </li>
               <hr className="row-start-5 bg-greyish-white w-80 h-0.5 rounded-sm"></hr>
               <li className="flex my-3">
                 <div className="border h-12 w-12 rounded-md"></div>
-                <div classname="flex self-center">
+                <div>
                   <h4 className="text-xs px-3 py-1">Address</h4>
-                  <p className="flex px-3 py-1 text-xs">1 BTC</p>
+                  <p className="flex px-3 py-1 text-xs">1 MATIC</p>
                 </div>
               </li>
             </ul>
@@ -166,10 +202,11 @@ const RequestTemplate = (props) => {
               Ethereum Network and made the donation through this website
             </p>
           </div>
+
           {createCurrencyFilterButton()}
 
           <div className="row-start-3 col-span-2 py-3 w-[45rem] px-1">
-            <p className="text-sm">Description</p>
+            <p className="text-sm">{Description}</p>
           </div>
           <hr className="row-start-4 col-start-1 bg-greyish-white w-[45rem] h-0.5 rounded-sm"></hr>
 
@@ -238,9 +275,9 @@ const RequestTemplate = (props) => {
               <ul>
                 <li className="flex my-3 mx-8">
                   <div className="border h-12 w-12 rounded-md"></div>
-                  <div classname="flex self-center">
+                  <div>
                     <h5 className="text-xs px-3 py-1">Address</h5>
-                    <p className="flex px-3 py-1 text-xs">1 BTC</p>
+                    <p className="flex px-3 py-1 text-xs">1 MATIC</p>
                   </div>
                 </li>
               </ul>
@@ -257,7 +294,7 @@ const RequestTemplate = (props) => {
               <ul>
                 <li className="flex my-3 mx-8">
                   <div className="border h-12 w-12 rounded-md"></div>
-                  <div classname="flex self-center">
+                  <div>
                     <h5 className="text-xs px-3 py-1">Address</h5>
                     <p className="flex text-xs font-semibold px-3 pb-3">Role</p>
                     <p className="flex text-xs px-3">Post Text</p>

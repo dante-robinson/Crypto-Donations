@@ -9,6 +9,7 @@ import {
   faSquareCaretDown as Downvote,
   faSquareCaretUp as Upvote,
 } from "@fortawesome/free-regular-svg-icons";
+import CurrencyIcon from "../CurrencyIcon";
 import Link from "next/link";
 
 const GridItems = (props) => {
@@ -36,221 +37,6 @@ const GridItems = (props) => {
   }, [props.conversionRate, props.currentPage]);
 
   const returnCurrency = (currency) => {
-    const getImage = () => {
-      if (currency === "ADA") {
-        return (
-          <div className="flex mr-1">
-            <Image
-              src={props.Cardano}
-              alt="Cardano Logo"
-              width="24"
-              height="16"
-            />
-          </div>
-        );
-      } else if (currency === "ALGO") {
-        return (
-          <div className="flex mr-1">
-            <Image
-              src={props.Algorand}
-              alt="Algorand Logo"
-              width="24"
-              height="16"
-            />
-          </div>
-        );
-      } else if (currency === "ATOM") {
-        return (
-          <div className="flex mr-1">
-            <Image
-              src={props.Cosmos}
-              alt="Cosmos Logo"
-              width="24"
-              height="16"
-            />
-          </div>
-        );
-      } else if (currency === "AVAX") {
-        return (
-          <div className="flex mr-1">
-            <Image
-              src={props.Avalanche}
-              alt="Avalanche Logo"
-              width="24"
-              height="16"
-            />
-          </div>
-        );
-      } else if (currency === "BNB") {
-        return (
-          <div className="flex mr-1">
-            <Image src={props.BSC} alt="Binance Logo" width="24" height="16" />
-          </div>
-        );
-      } else if (currency === "BTC") {
-        return (
-          <div className="flex mr-1">
-            <Image
-              src={props.Bitcoin}
-              alt="Bitcoin Logo"
-              width="24"
-              height="16"
-            />
-          </div>
-        );
-      } else if (currency === "BCH") {
-        return (
-          <div className="flex mr-1">
-            <Image
-              src={props.BitcoinCash}
-              alt="Bitcoin Cash Logo"
-              width="24"
-              height="16"
-            />
-          </div>
-        );
-      } else if (currency === "DASH") {
-        return (
-          <div className="flex mr-1">
-            <Image src={props.Dash} alt="Dash Logo" width="24" height="16" />
-          </div>
-        );
-      } else if (currency === "DOGE") {
-        return (
-          <div className="flex mr-1">
-            <Image
-              src={props.Dogecoin}
-              alt="Dogecoin Logo"
-              width="24"
-              height="16"
-            />
-          </div>
-        );
-      } else if (currency === "DOT") {
-        return (
-          <div className="flex mr-1">
-            <Image
-              src={props.Polkadot}
-              alt="Polkadot Logo"
-              width="24"
-              height="16"
-            />
-          </div>
-        );
-      } else if (currency === "EGLD") {
-        return (
-          <div className="flex mr-1">
-            <Image
-              src={props.Elrond}
-              alt="Elrond Logo"
-              width="24"
-              height="16"
-            />
-          </div>
-        );
-      } else if (currency === "ETC") {
-        return (
-          <div className="flex mr-1">
-            <Image
-              src={props.EthereumClassic}
-              alt="Ethereum Classic Logo"
-              width="24"
-              height="16"
-            />
-          </div>
-        );
-      } else if (currency === "ETH") {
-        return (
-          <div className="flex mr-1">
-            <Image
-              src={props.Ethereum}
-              alt="Ethereum Logo"
-              width="24"
-              height="16"
-            />
-          </div>
-        );
-      } else if (currency === "FTM") {
-        return (
-          <div className="flex mr-1">
-            <Image
-              src={props.Fantom}
-              alt="Fantom Logo"
-              width="24"
-              height="16"
-            />
-          </div>
-        );
-      } else if (currency === "LTC") {
-        return (
-          <div className="flex mr-1">
-            <Image
-              src={props.Litecoin}
-              alt="Litecoin Logo"
-              width="24"
-              height="16"
-            />
-          </div>
-        );
-      } else if (currency === "MATIC") {
-        return (
-          <div className="flex mr-1">
-            <Image
-              src={props.Polygon}
-              alt="Polygon Logo"
-              width="24"
-              height="16"
-            />
-          </div>
-        );
-      } else if (currency === "SOL") {
-        return (
-          <div className="flex mr-1">
-            <Image
-              src={props.Solana}
-              alt="Solana Logo"
-              width="24"
-              height="16"
-            />
-          </div>
-        );
-      } else if (currency === "XLM") {
-        return (
-          <div className="flex mr-1">
-            <Image
-              src={props.Stellar}
-              alt="Stellar Logo"
-              width="24"
-              height="16"
-            />
-          </div>
-        );
-      } else if (currency === "XMR") {
-        return (
-          <div className="flex mr-1">
-            <Image src={Monero} alt="Monero Logo" width="24" height="16" />
-          </div>
-        );
-      } else if (currency === "XRP") {
-        return (
-          <div className="flex mr-1">
-            <Image
-              src={props.Ripple}
-              alt="Ripple Logo"
-              width="24"
-              height="16"
-            />
-          </div>
-        );
-      } else if (currency === "ZEC") {
-        return (
-          <div className="flex mr-1">
-            <Image src={props.ZCash} alt="ZCash Logo" width="24" height="16" />
-          </div>
-        );
-      }
-    };
-
     return (
       <div className="flex">
         <p id="amount" className="pr-1 font-medium">
@@ -259,7 +45,23 @@ const GridItems = (props) => {
         <p id="currency" className="pr-1 font-semibold">
           {props._currency}
         </p>
-        {getImage()}
+        {
+          <CurrencyIcon
+            Bitcoin={props.Bitcoin}
+            BitcoinCash={props.BitcoinCash}
+            Cardano={props.Cardano}
+            Dash={props.Dash}
+            Dogecoin={props.Dogecoin}
+            Ethereum={props.Ethereum}
+            Litecoin={props.Litecoin}
+            Monero={props.Monero}
+            Polygon={props.Polygon}
+            Ripple={props.Ripple}
+            Stellar={props.Stellar}
+            ZCash={props.ZCash}
+            Currency={currency}
+          />
+        }
       </div>
     );
   };

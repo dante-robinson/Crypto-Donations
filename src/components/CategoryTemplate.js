@@ -190,28 +190,17 @@ const CategoryTemplate = (props) => {
           donation={props.donation}
           currentRequest={currentRequest}
           category={props.category}
-          Algorand={props.Algorand}
-          Avalanche={props.Avalanche}
           Bitcoin={props.Bitcoin}
           BitcoinCash={props.BitcoinCash}
-          BSC={props.BSC}
           Cardano={props.Cardano}
-          Cosmos={props.Cosmos}
           Dash={props.Dash}
           Dogecoin={props.Dogecoin}
-          Elrond={props.Elrond}
           Ethereum={props.Ethereum}
-          EthereumClassic={props.EthereumClassic}
-          Fantom={props.Fantom}
-          Harmony={props.Harmony}
           Litecoin={props.Litecoin}
           Monero={props.Monero}
-          Polkadot={props.Polkadot}
           Polygon={props.Polygon}
           Ripple={props.Ripple}
-          Solana={props.Solana}
           Stellar={props.Stellar}
-          Terra={props.Terra}
           ZCash={props.ZCash}
         />
       );
@@ -368,28 +357,18 @@ const CategoryTemplate = (props) => {
                 CurrencyRef={CurrencyRef}
                 setCurrency={setCurrency}
                 setCurrencyModal={setCurrencyModal}
-                Algorand={props.Algorand}
-                Avalanche={props.Avalanche}
                 Bitcoin={props.Bitcoin}
                 BitcoinCash={props.BitcoinCash}
-                BSC={props.BSC}
                 Cardano={props.Cardano}
-                Cosmos={props.Cosmos}
                 Dash={props.Dash}
                 Dogecoin={props.Dogecoin}
-                Elrond={props.Elrond}
                 Ethereum={props.Ethereum}
-                EthereumClassic={props.EthereumClassic}
-                Fantom={props.Fantom}
-                Harmony={props.Harmony}
                 Litecoin={props.Litecoin}
                 Monero={props.Monero}
                 Polkadot={props.Polkadot}
                 Polygon={props.Polygon}
                 Ripple={props.Ripple}
-                Solana={props.Solana}
                 Stellar={props.Stellar}
-                Terra={props.Terra}
                 ZCash={props.ZCash}
               />
             )}

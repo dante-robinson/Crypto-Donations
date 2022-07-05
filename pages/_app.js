@@ -4,6 +4,18 @@ import { Web3ReactProvider } from "@web3-react/core";
 import Web3 from "web3";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Bitcoin from "../public/Bitcoin.png";
+import BitcoinCash from "../public/BitcoinCash.png";
+import Cardano from "../public/Cardano.png";
+import Dash from "../public/Dash.png";
+import Dogecoin from "../public/Dogecoin.png";
+import Ethereum from "../public/Ethereum.png";
+import Litecoin from "../public/Litecoin.png";
+import Monero from "../public/Monero.png";
+import Polygon from "../public/Polygon.png";
+import Ripple from "../public/Ripple.png";
+import Stellar from "../public/Stellar.png";
+import ZCash from "../public/ZCash.png";
 
 const MyApp = ({ Component, pageProps }) => {
   const [Donation, setDonation] = useState(null);
@@ -47,7 +59,24 @@ const MyApp = ({ Component, pageProps }) => {
 
   const returnComponent = () => {
     if (Donation === null) return;
-    return <Component {...pageProps} donation={Donation} />;
+    return (
+      <Component
+        {...pageProps}
+        Bitcoin={Bitcoin}
+        BitcoinCash={BitcoinCash}
+        Cardano={Cardano}
+        Dash={Dash}
+        Dogecoin={Dogecoin}
+        Ethereum={Ethereum}
+        Litecoin={Litecoin}
+        Monero={Monero}
+        Polygon={Polygon}
+        Ripple={Ripple}
+        Stellar={Stellar}
+        ZCash={ZCash}
+        donation={Donation}
+      />
+    );
   };
 
   return (
