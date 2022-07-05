@@ -3,6 +3,8 @@ pragma solidity ^0.8.12;
 pragma abicoder v2;
 
 contract Storage {
+  // FIRST PART FOR MAKING A DONATION REQUEST
+
   /* Create variables for total number of requests in each category strings for
   each will be defined in the UI. */
   uint256 public animalRequests;
@@ -25,6 +27,7 @@ contract Storage {
   uint256 public volunteerRequests;
   uint256 public wishRequests;
 
+  // Add url to Request to read IPFS, Arweave and web2 storage Images 
   struct Request {
       string title;
       string description;
@@ -47,11 +50,10 @@ contract Storage {
   struct Organizer {
     string name;
     string role;
-    uint256 id;
     /* Coins are chosen based on being meant for medium of exchange with high
     transaction volume at the time. ADA and ETH are there aswell for smart
     contract support if people are interested in using that. */
-    string[21] addresses;
+    string[12] addresses;
     /* index 0 = btcAddress;
     index 1 = bchAddress;
     index 2 = adaAddress;
@@ -61,23 +63,9 @@ contract Storage {
     index 6 = ltcAddress;
     index 7 = xmrAddress;
     index 8 = zecAddress;
-
-    Extras just for support for other chains people may want to use if volume
-    drops off in the future maybe re-evaluate showing these in UI to keep things
-    more compact/clean.
-
-    index 9 = algoAddress;
-    index 10 = avaxAddress;
-    index 11 = bscAddress;
-    index 12 = atomAddress;
-    index 13 = egldAddress;
-    index 14 = etcAddress;
-    index 15 = ftmAddress;
-    index 16 = dotAddress;
-    index 17 = maticAddress;
-    index 18 = solAddress;
-    index 19 = xlmAddress;
-    index 20 = xrpAddress; */
+    index 9 = maticAddress;
+    index 10 = xlmAddress;
+    index 11 = xrpAddress; */
   }
 
   // Just to return Organizer addresses array in UI/tests
@@ -176,38 +164,41 @@ contract Storage {
     don't feel safe connecting names to addresses.
   */
   function addOrganzier (
-    string memory _name,
     string memory _role,
     string memory _category,
     uint256 _requestId,
-    uint256 _totalOrganizers,
-    string[23] memory _addresses
+    address _profile
   ) public {
+    uint256 _totalOrganizers = (Requests[_category][_requestId].totalOrganizers + 1);
     require(msg.sender == Requests[_category][_requestId].creator);
     /* Not all addresses need to be assigned a value. In the UI any addresses not
     assigned by default should be set to "" which would mean an empty string.
     That will cause setting the mapping data to not fail. Role will also be set
-    through the UI  */
+    through the UI. Here we are calling ProfileAddresses found in below which will call
+    the name and addresses already setup in the users profile this saves time and gas
+    when making multiple donation requests. It may also be possible to remove name and
+    addresses being saved in the Organizer struct and just display them in the UI by 
+    doing a .call() however this creates more load on the API for users not logged in. */
+    string memory _name = ProfileAddresses[_profile].name;
+    string[12] memory _addresses = ProfileAddresses[_profile].addresses;
     Organizers[_category][_requestId][_totalOrganizers] = Organizer(
-      _name, _role, _totalOrganizers, [_addresses[0], _addresses[1], _addresses[2],
-      _addresses[3], _addresses[4], _addresses[5], _addresses[6], _addresses[7],
-      _addresses[8], _addresses[9], _addresses[10], _addresses[11], _addresses[12],
-      _addresses[13], _addresses[14], _addresses[15], _addresses[16], _addresses[17],
-      _addresses[18], _addresses[19], _addresses[20]
-      ]
+      _name, _role, _addresses
     );
     Requests[_category][_requestId].totalOrganizers++;
   }
 
+  // Only the role should be editable
   function editOrganizer (
     string memory _role,
     string memory _category,
     uint256 _requestId,
-    uint256 _organizerId,
-    string[23] memory _addresses
+    uint256 _organizerId
   ) public {
+    /* Will make sure only the request creator can edit organizer data since category and requestId 
+    are given as inputs */
     require(msg.sender == Requests[_category][_requestId].creator);
     string memory _name = Organizers[_category][_requestId][_organizerId].name;
+    string[12] memory _addresses = Organizers[_category][_requestId][_organizerId].addresses;
     /* This method will cost extra gas and can be improved upon. This can be
     solved by either taking in less addresses or another way. In it's current
     form it will call the current data from the blockchain and input it into the
@@ -215,12 +206,25 @@ contract Storage {
     address again for those unchanged. The goal would be to save that extra gas
     cost so only the address added/changed is what's sent back. */
     Organizers[_category][_requestId][_organizerId] = Organizer(
-      _name, _role, _organizerId, [_addresses[0], _addresses[1], _addresses[2],
-      _addresses[3], _addresses[4], _addresses[5], _addresses[6], _addresses[7],
-      _addresses[8], _addresses[9], _addresses[10], _addresses[11], _addresses[12],
-      _addresses[13], _addresses[14], _addresses[15], _addresses[16], _addresses[17],
-      _addresses[18], _addresses[19], _addresses[20]
-      ]
+      _name, _role, _addresses
+    );
+  }
+
+    function deleteOrganizer (
+    string memory _category,
+    uint256 _requestId,
+    uint256 _organizerId
+  ) public {
+    require(msg.sender == Requests[_category][_requestId].creator);
+
+    /* Same issue as noted with editOrganizer above. With deleting an Organizer we
+    can only clear the data to empty strings. It will be the job of the UI to detect
+    this and not attempt to display it to a user. We can do this by checking either
+    no role has been given or by checking the Polygon address is doesn't exist which
+    is index 9 of the array. This is because the profile needs a Polygon address as a
+    minimum requirement to be an Organizer. */
+    Organizers[_category][_requestId][_organizerId] = Organizer(
+      "", "", ["", "", "", "", "", "" ,"" ,"" ,"", "" ,"" ,""]
     );
   }
 
@@ -286,13 +290,15 @@ contract Storage {
     Requests[_category][_requestId] = Request(_title, _description, _requestId, _amount, _totalOrganizers, _totalContributors, _score, _creator, _totalPosts);
   }
 
-  // NEEDS FIXED DOESNT SEND PAYMENT TO CONTRACT
   function addContributor(
     string memory _category,
-    uint256 _requestId,
-    uint256 _amountDonated,
-    address _contributorAddress
-  ) public {
+    uint256 _requestId
+  ) public payable {
+    require (msg.value > 1);
+    uint256 _amountDonated = msg.value;
+    address _contributorAddress = msg.sender;
+    (bool success, ) = _contributorAddress.call{value: _amountDonated}("");
+    require(success, "Transaction failed.");
     uint256 _totalContributors = Requests[_category][_requestId].totalContributors;
     Contributors[_category][_requestId][_totalContributors] = Contributor(_amountDonated, _contributorAddress, _totalContributors);
     Requests[_category][_requestId].totalContributors++;
@@ -311,4 +317,57 @@ contract Storage {
     Posts[_category][_requestId][_totalPosts] = Post(_title, _description, _date);
     Requests[_category][_requestId].totalPosts++;
   }
+
+  // SECOND PART FOR HOSTING ADDRESSES ON A PROFILE
+
+  // A profile doesn't need to be manually created because it will locate your account based on your polygon address
+  struct Profile{
+    // Name should be optional
+    string name;
+    string[12] addresses;
+    /* index 0 = btcAddress;
+    index 1 = bchAddress;
+    index 2 = adaAddress;
+    index 3 = dashAddress;
+    index 4 = dogeAddress;
+    index 5 = ethAddress;
+    index 6 = ltcAddress;
+    index 7 = xmrAddress;
+    index 8 = zecAddress;
+    index 9 = maticAddress;
+    index 10 = xlmAddress;
+    index 11 = xrpAddress; */
+  }
+
+  // Polygon Account address => Addresses
+  mapping(address => Profile) public ProfileAddresses;
+
+  function addAddressToProfile(
+    string memory _name,
+    string[12] memory _addresses
+  ) public {
+    // As mentioned with Organizer not all addresses need to be provided 
+    ProfileAddresses[msg.sender] = Profile(_name, [_addresses[0], _addresses[1], _addresses[2],
+      _addresses[3], _addresses[4], _addresses[5], _addresses[6], _addresses[7],
+      _addresses[8], _addresses[9], _addresses[10], _addresses[11]
+      ]
+    );
+  }
+
+  /* There is no deleteProfile function as all Polygon addresses will by default without logging in return
+  with a profile page for just the polygon account. Therefore only an editProfile is needed to edit/remove/add 
+  addresses. */
+    function editProfile(
+    string memory _name,
+    string[12] memory _addresses
+  ) public {
+    // As mentioned with Organizer not all addresses need to be provided 
+    ProfileAddresses[msg.sender] = Profile(_name, [_addresses[0], _addresses[1], _addresses[2],
+      _addresses[3], _addresses[4], _addresses[5], _addresses[6], _addresses[7],
+      _addresses[8], _addresses[9], _addresses[10], _addresses[11]
+      ]
+    );
+  }
+
 }
+
