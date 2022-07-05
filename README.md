@@ -17,15 +17,6 @@ To keep things simple people who want to open a request will have to pay a gas f
 ### What coins are supported?
 
 <p>
-  <a href="https://www.algorand.com/">
-    <img src="public/Algorand.png" width=64 />
-  </a>
-  <a href="https://www.avax.network/">
-    <img src="public/Avalanche.png" width=64 />
-  </a>
-  <a href="https://www.bnbchain.world/">
-    <img src="public/BSC.png" width=64 />
-  </a>
   <a href="https://bitcoin.org/">
     <img src="public/Bitcoin.png" width=64 />
   </a>
@@ -35,38 +26,20 @@ To keep things simple people who want to open a request will have to pay a gas f
   <a href="https://cardano.org/">
     <img src="public/Cardano.png" width=64 />
   </a>
-  <a href="https://cosmos.network/">
-    <img src="public/Cosmos.png" width=64 />
-  </a>
   <a href="https://www.dash.org/">
     <img src="public/Dash.png" width=64 />
   </a>
   <a href="https://dogecoin.com/">
     <img src="public/Dogecoin.png" width=64 />
   </a>
-  <a href="https://elrond.com/">
-    <img src="public/Elrond.png" width=64 />
-  </a>
   <a href="https://ethereum.org/">
     <img src="public/Ethereum.png" width=64 />
-  </a>
-  <a href="https://ethereumclassic.org/">
-    <img src="public/EthereumClassic.png" width=64 />
-  </a>
-  <a href="https://fantom.foundation/">
-    <img src="public/Fantom.png" width=64 />
-  </a>
-  <a href="https://www.harmony.one/">
-    <img src="public/Harmony.png" width=64 />
   </a>
   <a href="https://litecoin.org/">
     <img src="public/Litecoin.png" width=64 />
   </a>
   <a href="https://www.getmonero.org/">
     <img src="public/Monero.png" width=64 />
-  </a>
-  <a href="https://polkadot.network/">
-    <img src="public/Polkadot.png" width=64 />
   </a>
   <a href="https://polygon.technology/">
     <img src="public/Polygon.png" width=64 />
@@ -76,12 +49,6 @@ To keep things simple people who want to open a request will have to pay a gas f
   </a>
   <a href="https://www.stellar.org/">
     <img src="public/Stellar.png" width=64 />
-  </a>
-  <a href="https://solana.com/">
-    <img src="public/Solana.png" width=64 />
-  </a>
-  <a href="https://www.terra.money/">
-    <img src="public/Terra.png" width=64 />
   </a>
   <a href="https://z.cash/">
     <img src="public/ZCash.png" width=64 />
