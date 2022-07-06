@@ -12,7 +12,12 @@ const Footer = () => {
         >
           Check out the project on Github
         </a>
-        <FontAwesomeIcon className="text-greyish-white ml-2" icon={faGithub} />
+        <div className="mr-2">
+          <FontAwesomeIcon
+            className="text-greyish-white ml-2"
+            icon={faGithub}
+          />
+        </div>
       </div>
     </div>
   );
