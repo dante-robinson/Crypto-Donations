@@ -14,6 +14,7 @@ import {
 import OnClickOutsideTwoRef from "./OnClickOutsideTwoRef";
 import CurrencyFilter from "./CurrencyFilter";
 import CurrencyIcon from "./CurrencyIcon";
+import DonateModal from "./RequestTemplate/DonateModal.js"
 import axios from "axios";
 import getConfig from "next/config";
 
@@ -26,12 +27,25 @@ const RequestTemplate = (props) => {
   const [Description, setDescription] = useState(null);
   const [Amount, setAmount] = useState(null);
   const [Score, setScore] = useState(null);
+  const [DonateModalOpen, setDonateModalOpen] = useState(false);
 
   const CurrencyRef = useRef();
   const CurrencyButtonRef = useRef();
+  const DonateRef = useRef();
+
   OnClickOutsideTwoRef(CurrencyRef, CurrencyButtonRef, () =>
     setCurrencyModal(false)
   );
+
+  OnClickOutsideTwoRef(DonateRef, () => setDonateModalOpen(false));
+
+  const isOpen = () => {
+    if (DonateModalOpen === false) {
+      setDonateModalOpen(true);
+    } else if (DonateModalOpen === true) {
+      setDonateModalOpen(false);
+    }
+  };
 
   const getRequestData = async () => {
     let response = await props.donation.methods
@@ -223,7 +237,10 @@ const RequestTemplate = (props) => {
                     <p className="flex text-xs font-semibold px-3 pb-1">Role</p>
                     <p className="flex text-xs px-3">Currency</p>
                     <div className="pt-3 flex justify-center">
-                      <button className="flex justify-center text-xs h-12 w-36 text-center rounded-md border-2 border-black ml-2">
+                      <button
+                        onClick={() => setDonateModalOpen(true)}  
+                        className="flex justify-center text-xs h-12 w-36 text-center rounded-md border-2 border-black ml-2"
+                      >
                         <p className="self-center">Donate to this Address</p>
                       </button>
                     </div>
@@ -239,7 +256,9 @@ const RequestTemplate = (props) => {
                     <p className="flex text-xs px-3">Currency</p>
                   </div>
                   <div className="pt-3 flex justify-center">
-                    <button className="flex justify-center text-xs h-12 w-36 text-center rounded-md border-2 border-black ml-2">
+                    <button
+                        onClick={() => setDonateModalOpen(true)}
+                        className="flex justify-center text-xs h-12 w-36 text-center rounded-md border-2 border-black ml-2">
                       <p className="self-center">Donate to this Address</p>
                     </button>
                   </div>
@@ -253,7 +272,10 @@ const RequestTemplate = (props) => {
                     <p className="flex text-xs font-semibold px-3 pb-1">Role</p>
                     <p className="flex text-xs px-3">Currency</p>
                     <div className="pt-3 flex justify-center">
-                      <button className="flex justify-center text-xs h-12 w-36 text-center rounded-md border-2 border-black ml-2">
+                      <button
+                        onClick={() => setDonateModalOpen(true)}
+                        className="flex justify-center text-xs h-12 w-36 text-center rounded-md border-2 border-black ml-2"
+                      >
                         <p className="self-center">Donate to this Address</p>
                       </button>
                     </div>
@@ -267,7 +289,7 @@ const RequestTemplate = (props) => {
         <div className="grid grid-cols-2 grid-rows-1 px-[20vw] w-screen">
           <div className="">
             <div className="flex justify-center">
-              <h4 className="col-start-1 justify-self-center text-lg font-semibold justify-self-center py-3">
+              <h4 className="col-start-1 justify-self-center text-lg font-semibold py-3">
                 All Contributors
               </h4>
             </div>
@@ -286,7 +308,7 @@ const RequestTemplate = (props) => {
 
           <div>
             <div className="flex justify-center">
-              <h4 className="col-start-2 justify-self-center text-lg font-semibold justify-self-center py-3">
+              <h4 className="col-start-2 justify-self-center text-lg font-semibold py-3">
                 Posts
               </h4>
             </div>
@@ -306,6 +328,10 @@ const RequestTemplate = (props) => {
         </div>
       </div>
       <Footer />
+
+      {DonateModalOpen && (
+        <DonateModal setDonateModalOpen={setDonateModalOpen} Currency={Currency} />
+      )}
     </div>
   );
 };

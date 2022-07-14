@@ -62,7 +62,7 @@ const GridItems = (props) => {
             Currency={currency}
           />
         }
-      </div>
+    </div>
     );
   };
 
