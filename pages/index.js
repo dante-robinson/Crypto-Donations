@@ -33,7 +33,7 @@ const HomePage = (props) => {
               <h1 className="h-16 flex items-center justify-center text-4xl font-semibold">
                 How It Works
               </h1>
-              <div className="space-y-[0.5vh] text-center justify-self-center">
+              <div className="space-y-[1vh] text-center justify-self-center">
                 <h3 className="text-xl font-bold">Option A</h3>
 
                 <p>Create a Request (gas fee)</p>
@@ -58,7 +58,7 @@ const HomePage = (props) => {
               <h1 className="h-16 flex items-center justify-center text-4xl font-semibold">
                 Tips
               </h1>
-              <div className="flex flex-col space-y-[5vh] text-center">
+              <div className="flex flex-col space-y-[1vh] text-center">
                 <p>
                   Use a hardware wallet like the Ledger Nano X or Trezor Model T. This
                   ensures that a you own your private keys so a company or exchange
