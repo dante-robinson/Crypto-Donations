@@ -15,7 +15,6 @@ const HomeRequestItems = (props) => {
   const [Title, setTitle] = useState(null);
   const [Description, setDescription] = useState(null);
   const [Amount, setAmount] = useState(null);
-  const [Score, setScore] = useState(null);
   const [Response, setResponse] = useState(null);
 
   useEffect(() => {
@@ -47,27 +46,21 @@ const HomeRequestItems = (props) => {
       setDescription(description.substring(0, 120));
       let amount = Response.amount / 1;
       setAmount(amount.toFixed(2).substring(0, 10));
-      setScore(Response.score);
     };
 
     getRequestData();
   }, [Response]);
 
   return (
-    <button className="flex w-content h-content border-4 border-bg-darker-white bg-light-anti-flash-white w-full h-96 rounded-md">
-      <div className="grid grid-rows-requestList w-full h-full">
+    <button className="flex md:w-full md:space-y-[4vh] lg:w-64 2xl:w-72 lg:h-content border-4 border-bg-darker-white bg-light-anti-flash-white h-96 rounded-md">
+      <div className="flex flex-col justify-between w-full h-full">
         <h4 className="flex w-full font-semibold text-xl justify-center pt-2">
           {Title}
         </h4>
-        <p className="row-start-3 flex w-full justify-center text-md">
+        <p className="flex w-full justify-center text-md">
           {Description}
         </p>
-        <div className="row-start-4 flex justify-between items-end pb-2 w-full">
-          <div className="flex">
-            <FontAwesomeIcon className="text-2xl pl-2" icon={Upvote} />
-            <p className="pl-2 pr-2">{Score}</p>
-            <FontAwesomeIcon className=" text-2xl" icon={Downvote} />
-          </div>
+        <div className="flex justify-center items-end pb-2 w-full">
           <div className="flex">
             <p id="amount" className="pr-1 font-medium">
               {Amount}

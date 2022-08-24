@@ -203,6 +203,7 @@ const ListRequests = (props) => {
       let requestTwo = Math.ceil(Math.random() * Requests);
       let requestThree = Math.ceil(Math.random() * Requests);
       let requestFour = Math.ceil(Math.random() * Requests);
+      let requestFive = Math.ceil(Math.random() * Requests);
 
       // Make sure to not load same request multiple times
 
@@ -231,8 +232,21 @@ const ListRequests = (props) => {
           requestFour = Math.ceil(Math.random() * Requests);
         }
       }
+      if (requestFive == requestOne || requestTwo || requestThree || requestFour) {
+        for (
+          let i = 0;
+          requestFive == requestOne ||
+          requestFive == requestTwo ||
+          requestFive == requestThree ||
+          requestFive == requestFour;
+          i++
+        ) {
+          requestFive = Math.ceil(Math.random() * Requests);
+        }
+      }
 
-      return [requestOne, requestTwo, requestThree, requestFour];
+
+      return [requestOne, requestTwo, requestThree, requestFour, requestFive];
     };
 
     function getValues() {
@@ -251,7 +265,7 @@ const ListRequests = (props) => {
     // change currentRequest to random numbers
     // category also needs randomized
 
-    for (let box = 0; box < 4; box++) {
+    for (let box = 0; box < 5; box++) {
       // Change category={"animal"} to category={Category} after testing is done
       output.push(
         <HomeRequestItems
@@ -268,10 +282,10 @@ const ListRequests = (props) => {
   };
 
   return (
-    <div className="pt-8 flex flex-wrap justify-center">
-      <h1 className="text-4xl font-semibold">Check out these Requests</h1>
-      {RequestArray.length === 4 && Requests !== null && Category !== null ? (
-        <div className="pt-6 pb-6 flex space-x-6">{createBoxes()}</div>
+    <div className="w-[80vw] h-full pt-8 justify-center">
+      <h1 className="text-4xl flex text-center font-semibold justify-center pb-2">Check out these Requests</h1>
+      {RequestArray.length === 5 && Requests !== null && Category !== null ? (
+        <div className="flex flex-col space-y-[1vh] lg:flex-nowrap lg:space-y-0 lg:flex-row lg:pt-6 lg:space-x-[0.80vw]">{createBoxes()}</div>
       ) : (
         <div></div>
       )}

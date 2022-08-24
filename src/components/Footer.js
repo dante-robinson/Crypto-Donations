@@ -4,8 +4,8 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
   return (
-    <div className="flex pt-6">
-      <div className="relative w-full flex h-[5vh] bg-crayola-blue items-center justify-end">
+    <div className="flex pt-2">
+      <div className="relative w-full flex h-[5vh] bg-crayola-blue items-center justify-center md:justify-end">
         <a
           href="https://github.com/dante-robinson/Unstoppable-Donations"
           className="text-greyish-white"
