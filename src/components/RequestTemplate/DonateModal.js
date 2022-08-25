@@ -23,11 +23,11 @@ const DonateModal = ({ setDonateModalOpen, Currency }) => {
           </button>
         </div>
 
-        {/* Width large enough to fit 18 decimal places */} 
+        {/* Width large enough to fit 18 decimal places */}
         <div className="flex justify-center">
           <input
             type="text"
-            class="
+            className="
               form-control
               block
               w-42
@@ -54,11 +54,11 @@ const DonateModal = ({ setDonateModalOpen, Currency }) => {
           />
           <h4 className="flex items-center">{Currency}</h4>
         </div>
-      <div className="flex mt-8 justify-center">
-        <button className="flex justify-center w-32 h-12 border-2 rounded-md bg-anti-flash-white hover:bg-darker-white">
-          <h5 className="flex items-center">Confirm</h5>
-        </button> 
-      </div>
+        <div className="flex mt-8 justify-center">
+          <button className="flex justify-center w-32 h-12 border-2 rounded-md bg-anti-flash-white hover:bg-darker-white">
+            <h5 className="flex items-center">Confirm</h5>
+          </button>
+        </div>
       </div>
     </div>
   );

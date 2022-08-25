@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import CategoryTemplate from "../../../src/components/CategoryTemplate";
+import CategoryTemplate from "../../../../src/components/CategoryTemplate";
 
 const Competition = (props) => {
   const router = useRouter();
