@@ -266,6 +266,19 @@ const ListRequests = (props) => {
     // category also needs randomized
 
     for (let box = 0; box < 5; box++) {
+      let requestId;
+      // Passthrough requestId so clicking on post from homepage redirects to the right request
+      if (box == 0) {
+        requestId = RequestArray[0];
+      } else if (box == 1) {
+        requestId = RequestArray[1];
+      } else if (box == 2) {
+        requestId = RequestArray[2];
+      } else if (box == 3) {
+        requestId = RequestArray[3];
+      } else {
+        requestId = RequestArray[4];
+      }
       // Change category={"animal"} to category={Category} after testing is done
       output.push(
         <HomeRequestItems
@@ -275,6 +288,7 @@ const ListRequests = (props) => {
           _currency={"BTC"}
           donation={props.donation}
           category={"animal"}
+          requestId={requestId}
         />
       );
     }

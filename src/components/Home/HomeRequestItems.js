@@ -53,29 +53,34 @@ const HomeRequestItems = (props) => {
   }, [Response]);
 
   return (
-    <button className="flex md:w-full md:space-y-[4vh] lg:w-64 2xl:w-72 lg:h-content border-4 border-bg-darker-white bg-light-anti-flash-white h-96 rounded-md">
-      <div className="flex flex-col justify-between w-full h-full">
-        <h4 className="flex w-full font-semibold text-xl justify-center pt-2">
-          {Title}
-        </h4>
-        <p className="flex w-full justify-center text-md">
-          {Description}
-        </p>
-        <div className="flex justify-center items-end pb-2 w-full">
-          <div className="flex">
-            <p id="amount" className="pr-1 font-medium">
-              {Amount}
+    <Link href={`/categories/${props.category}/request/${props.requestId}`}>
+      <a>
+        <div className="flex md:w-full md:space-y-[4vh] lg:w-64 2xl:w-72 lg:h-content border-4 border-bg-darker-white bg-light-anti-flash-white h-96 rounded-md">
+
+          <div className="flex flex-col justify-between w-full h-full">
+            <h4 className="flex w-full font-semibold text-xl justify-center pt-2">
+              {Title}
+            </h4>
+            <p className="flex w-full text-center justify-center text-md">
+              {Description}
             </p>
-            <p id="currency" className="pr-1 font-semibold">
-              {props._currency}
-            </p>
-            <div className="flex mr-1">
-              <Image src={Bitcoin} alt="Bitcoin Logo" width="24" height="16" />
+            <div className="flex justify-center items-end pb-2 w-full">
+              <div className="flex">
+                <p id="amount" className="pr-1 font-medium">
+                  {Amount}
+                </p>
+                <p id="currency" className="pr-1 font-semibold">
+                  {props._currency}
+                </p>
+                <div className="flex mr-1">
+                  <Image src={Bitcoin} alt="Bitcoin Logo" width="24" height="16" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </button>
+      </a>
+    </Link >
   );
 };
 
